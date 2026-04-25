@@ -226,13 +226,13 @@ nav.scrolled{padding:11px 60px}
 .partners{position:relative;z-index:1;padding:52px 20px;background:var(--b2)}
 .partners-label{text-align:center;font-family:'Montserrat',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:28px}
 .partners-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;max-width:1100px;margin:0 auto}
-.pcard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:22px 12px;background:var(--b4);border:1px solid rgba(201,151,42,.18);transition:border-color .25s,background .25s,transform .2s}
+.pcard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:22px 12px;background:var(--b4);border:1px solid rgba(201,151,42,.18);transition:border-color .25s,background .25s,transform .2s;text-decoration:none;cursor:pointer}
 .pcard:hover{border-color:var(--gold);background:rgba(201,151,42,.07);transform:translateY(-2px)}
 .pcard svg{transition:filter .25s}
 .pcard:hover svg{filter:drop-shadow(0 0 8px currentColor)}
 .pcard .pn{font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:2px;text-transform:uppercase}
 .p-bin .pn{color:#F3BA2F}.p-byb .pn{color:#F7A600}.p-exn .pn{color:#FF6600}
-.p-van .pn{color:#FF3B30}.p-xm .pn{color:#E00}.p-okx .pn{color:#bbb}
+.p-van .pn{color:#FF3B30}.p-pup .pn{color:#0033CC}.p-okx .pn{color:#bbb}
 
 /* ── COPYTRADE ── */
 .copytrade-section{position:relative;z-index:1;padding:80px 20px;background:var(--b3)}
@@ -366,6 +366,7 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
 .badge-live{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.35);color:#4ade80}
 .badge-safe{background:rgba(201,151,42,.12);border:1px solid rgba(201,151,42,.38);color:var(--gl)}
 .badge-speed{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.32);color:#f87272}
+.badge-crypto{background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.38);color:#93c5fd}
 .sc-pnl{text-align:right;flex-shrink:0}
 .sc-pnl-val{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1;display:block}
 .sc-pnl-val.grn{color:#4ade80}
@@ -393,6 +394,68 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
 .litem:hover{border-color:var(--gold);color:var(--gl);background:rgba(201,151,42,.05)}
 .litem .ar{color:var(--gold)}
 
+/* BOT SERVICE FULLPAGE */
+.bsp{display:none;position:fixed;inset:0;z-index:500;background:var(--b);overflow-y:auto}
+.bsp.open{display:block;animation:fadein .3s ease}
+.bsp-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(0,0,0,.96);border-bottom:1px solid rgba(59,130,246,.25);position:sticky;top:0;z-index:10;backdrop-filter:blur(16px)}
+.bsp-back{background:none;border:1px solid rgba(59,130,246,.4);color:#93c5fd;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;cursor:pointer;transition:all .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.bsp-back:hover{background:rgba(59,130,246,.09);border-color:#3b82f6}
+.bsp-hero{padding:56px 20px 40px;text-align:center;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(59,130,246,.08),transparent 70%)}
+.bsp-hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(1.8rem,6vw,3.2rem);font-weight:900;background:linear-gradient(135deg,#93c5fd,#3b82f6,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;line-height:1;text-transform:uppercase;letter-spacing:3px}
+.bsp-hero p{font-size:.92rem;color:var(--w5);max-width:560px;margin:0 auto 28px;line-height:1.75}
+.bsp-body{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
+.bsp-section{margin-bottom:44px}
+.bsp-section-title{font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#3b82f6;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.bsp-section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,.3),transparent)}
+.bsp-services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:0}
+.bsp-svc{background:var(--b3);border:1px solid rgba(59,130,246,.15);padding:22px 18px;transition:border-color .25s,transform .25s}
+.bsp-svc:hover{border-color:rgba(59,130,246,.5);transform:translateY(-3px)}
+.bsp-svc-icon{font-size:1.6rem;margin-bottom:10px;display:block}
+.bsp-svc-name{font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:800;color:#93c5fd;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.bsp-svc-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.bsp-tag{font-size:.58rem;font-weight:700;letter-spacing:1px;padding:2px 8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:#93c5fd;text-transform:uppercase}
+.bsp-svc-desc{font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.55}
+.bsp-tech-grid{display:flex;flex-wrap:wrap;gap:8px}
+.bsp-tech-badge{font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.5px;padding:6px 14px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);color:#93c5fd;text-transform:uppercase;transition:all .2s}
+.bsp-tech-badge:hover{background:rgba(59,130,246,.18);border-color:#3b82f6}
+.bsp-process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.bsp-step{background:var(--b3);border:1px solid rgba(59,130,246,.12);padding:22px 16px;text-align:center;position:relative}
+.bsp-step-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:rgba(59,130,246,.12);line-height:1;margin-bottom:8px}
+.bsp-step-icon{font-size:1.4rem;margin-bottom:8px;display:block}
+.bsp-step-name{font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;color:#93c5fd;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.bsp-step-desc{font-size:.72rem;color:rgba(255,255,255,.4);line-height:1.5}
+.bsp-cta-box{background:linear-gradient(135deg,rgba(30,58,138,.4),rgba(59,130,246,.1));border:1px solid rgba(59,130,246,.28);padding:36px 32px;text-align:center}
+.bsp-cta-box h3{font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:900;color:#93c5fd;margin-bottom:10px;text-transform:uppercase;letter-spacing:2px}
+.bsp-cta-box p{font-size:.86rem;color:var(--w3);margin-bottom:24px;line-height:1.65}
+.bsp-cta-links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+
+/* EA FULLPAGE */
+.esp{display:none;position:fixed;inset:0;z-index:500;background:var(--b);overflow-y:auto}
+.esp.open{display:block;animation:fadein .3s ease}
+.esp-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(0,0,0,.96);border-bottom:1px solid rgba(201,151,42,.25);position:sticky;top:0;z-index:10;backdrop-filter:blur(16px)}
+.esp-back{background:none;border:1px solid rgba(201,151,42,.35);color:var(--gl);font-family:'Montserrat',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;cursor:pointer;transition:all .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.esp-back:hover{background:rgba(201,151,42,.09);border-color:var(--gold)}
+.esp-hero{padding:56px 20px 40px;text-align:center;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(201,151,42,.1),transparent 70%)}
+.esp-hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(1.8rem,6vw,3.2rem);font-weight:900;background:linear-gradient(135deg,var(--gl),var(--gb),var(--gp));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;line-height:1;text-transform:uppercase;letter-spacing:3px}
+.esp-hero p{font-size:.92rem;color:var(--w5);max-width:560px;margin:0 auto 28px;line-height:1.75}
+.esp-body{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
+.esp-section{margin-bottom:44px}
+.esp-section-title{font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.esp-section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(201,151,42,.3),transparent)}
+.esp-metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:0}
+.esp-metric{background:var(--b3);border:1px solid rgba(201,151,42,.15);padding:22px 12px;text-align:center}
+.esp-mv{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--gl);line-height:1;display:block;margin-bottom:4px}
+.esp-ml{font-size:.52rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);display:block}
+.esp-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.esp-feat{background:var(--b3);border:1px solid rgba(201,151,42,.1);padding:24px 20px;transition:border-color .25s,transform .25s}
+.esp-feat:hover{border-color:rgba(201,151,42,.4);transform:translateY(-3px)}
+.esp-feat-icon{font-size:1.5rem;margin-bottom:10px;display:block}
+.esp-feat-name{font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:800;color:var(--gp);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.esp-feat-desc{font-size:.78rem;color:rgba(255,255,255,.42);line-height:1.55}
+.esp-cta-box{background:linear-gradient(135deg,rgba(122,90,16,.3),rgba(201,151,42,.1));border:1px solid rgba(201,151,42,.3);padding:36px 32px;text-align:center}
+.esp-cta-box h3{font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:900;color:var(--gp);margin-bottom:10px;text-transform:uppercase;letter-spacing:2px}
+.esp-cta-box p{font-size:.86rem;color:var(--w3);margin-bottom:24px;line-height:1.65}
+
 /* UTILS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 .ain{opacity:0;transform:translateY(32px);transition:opacity .6s ease,transform .6s ease}
@@ -413,13 +476,9 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
   .hs-grid{grid-template-columns:1fr}
   .hs-item{padding:16px 18px;display:flex;align-items:center;gap:14px;text-align:left}
   .hs-icon{margin-bottom:0;font-size:1.2rem}
-
-  /* SERVICES */
   .services-section{padding:56px 16px 64px}
   .svc-grid{grid-template-columns:1fr;gap:3px}
   .svc-cta .abtn{max-width:100%}
-
-  /* FLOW */
   .flow-section{padding:56px 16px 64px}
   .flow-title{font-size:clamp(1.4rem,7vw,2rem)}
   .metrics-box{grid-template-columns:repeat(3,1fr);margin-bottom:32px}
@@ -429,43 +488,29 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
   .metric:nth-child(5){border-top:1px solid rgba(201,151,42,.12);border-right:none}
   .metric:nth-child(4){grid-column:1/2}.metric:nth-child(5){grid-column:2/3}
   .feature-cards{grid-template-columns:1fr}
-
-  /* PARTNERS */
   .partners{padding:40px 16px}
   .partners-grid{grid-template-columns:repeat(3,1fr)}
   .pcard{padding:16px 8px;gap:7px}.pcard .pn{font-size:.6rem}
-
-  /* COPYTRADE */
   .copytrade-section{padding:56px 16px}
   .ct-inner{grid-template-columns:1fr;gap:28px}
   .ct-card-wrap{order:1}.ct-content{order:2}
   .ct-content .flow-tag,.ct-content h2,.ct-content>p{text-align:center}
   .ct-content .abtn{display:block;max-width:100%;text-align:center}
   .strategies{grid-template-columns:1fr;gap:12px;margin-top:32px}
-
-  /* HOW */
   .how{padding:56px 16px}
   .steps-row{grid-template-columns:1fr;gap:28px}
   .steps-row::before{display:none}
   .step{display:flex;align-items:flex-start;gap:16px;text-align:left;padding:0}
   .step-n{width:72px;height:72px;margin:0;flex-shrink:0;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
   .step-n span{font-size:1.8rem}.step-text{flex:1}
-
-  /* CTA */
   .cta-section{padding:60px 16px}
   .cta-btns{flex-direction:column;align-items:center;gap:10px}
   .cta-btns .abtn{max-width:280px}
-
-  /* FOOTER */
   footer{padding:40px 16px 28px}
   .ft-inner{grid-template-columns:1fr;gap:28px}
   .ft-brand p{max-width:100%}
   .ft-bot{flex-direction:column;gap:12px;text-align:center}
-
-  /* FAB */
   .mob-fab{display:flex}
-
-  /* CT PAGE */
   .ctp-nav{padding:12px 16px}
   .ctp-hero{padding:36px 16px 24px}
   .ctp-tabs{padding:0;flex-direction:column;border-bottom:none;gap:1px;background:rgba(201,151,42,.08)}
@@ -481,6 +526,12 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
   .sc-cta{flex-direction:column;align-items:stretch}
   .sc-cta .abtn{text-align:center;max-width:100%}
   .ctp-contact{padding:32px 12px 48px}
+  .bsp-services-grid{grid-template-columns:1fr}
+  .bsp-process-grid{grid-template-columns:repeat(2,1fr)}
+  .bsp-body{padding:24px 12px 48px}
+  .esp-metrics{grid-template-columns:repeat(3,1fr)}
+  .esp-feats{grid-template-columns:1fr}
+  .esp-body{padding:24px 12px 48px}
 }
 @media(max-width:380px){
   .hero-title{letter-spacing:2px}
@@ -518,29 +569,32 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
   </div>
 </div>
 
-<!-- COPYTRADE FULLPAGE -->
+<!-- ══════════════════════
+     COPYTRADE FULLPAGE
+══════════════════════ -->
 <div class="ctp" id="ctPage">
   <div class="ctp-nav">
-    <div class="logo" style="font-size:1.1rem">tCode<span class="logo-sub">COPYTRADE · XTO SPEED</span></div>
+    <div class="logo" style="font-size:1.1rem">tCode<span class="logo-sub">COPYTRADE · XTO CAPITAL</span></div>
     <button class="ctp-back" onclick="closeCT()">← Quay Lại</button>
   </div>
   <div class="ctp-hero">
-    <h1>XTO Speed CopyTrade</h1>
-    <p>Hai chiến lược đầu tư với số liệu thực — minh bạch, xác thực, phù hợp mọi khẩu vị rủi ro.</p>
+    <h1>XTO Capital CopyTrade</h1>
+    <p>Hai chiến lược đầu tư — Forex XAUUSD trên Vantage và Crypto trên Binance. Minh bạch, xác thực, phù hợp mọi khẩu vị rủi ro.</p>
   </div>
   <div class="ctp-tabs">
-    <button class="ctab active" onclick="switchTab(0)">🛡️ XTO Speed — An Toàn</button>
-    <button class="ctab" onclick="switchTab(1)">⚡ XTO Speed — Tốc Độ</button>
+    <button class="ctab active" onclick="switchTab(0)">📈 Forex CopyTrade — XAUUSD</button>
+    <button class="ctab" onclick="switchTab(1)">₿ Crypto CopyTrade</button>
   </div>
   <div class="ctp-panels">
+    <!-- FOREX TAB -->
     <div class="cpanel active" id="cp0">
       <div class="sc-card">
         <div class="sc-head">
           <div class="sc-ident">
             <div class="sc-av">XC</div>
             <div>
-              <div class="sc-name">XTO Speed</div>
-              <div class="sc-tag">Chiến lược ổn định · Ưu tiên bảo toàn vốn</div>
+              <div class="sc-name">XTO Capital (XAUUSD)</div>
+              <div class="sc-tag">Forex CopyTrade · Vantage Markets · Chiến lược vàng</div>
               <div class="sc-badges"><span class="badge badge-live">● Live</span><span class="badge badge-safe">🛡️ An Toàn</span></div>
             </div>
           </div>
@@ -560,28 +614,33 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
           <div class="sc-notes">
             <div class="sc-notes-t">Thông Số Vận Hành</div>
             <ul style="list-style:none">
+              <li>Cặp giao dịch: <strong style="color:var(--gl)">XAUUSD (Vàng)</strong></li>
               <li>Lợi nhuận mục tiêu: <strong style="color:var(--gl)">1.5% – 3% mỗi ngày</strong></li>
               <li>Stop Loss tối đa: <strong style="color:var(--gl)">15%</strong></li>
               <li>Max Drawdown hiện tại <strong style="color:#4ade80">16%</strong> — được kiểm soát chặt chẽ</li>
             </ul>
           </div>
           <div class="sc-cta">
-            <div class="sc-cta-txt">Kết nối tài khoản Vantage Markets và bắt đầu CopyTrade chiến lược an toàn của XTO Speed.</div>
-            <a href="https://vigco.co/la-com-inv/vi/Rn4u2Uep" target="_blank" rel="noopener" class="abtn abtn-gold"><span class="abtn-border"></span><span class="abtn-label">Mở Tài Khoản & CopyTrade</span></a>
+            <div class="sc-cta-txt">Kết nối tài khoản Vantage Markets và bắt đầu CopyTrade chiến lược XAUUSD của XTO Capital.</div>
+            <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end">
+              <a href="https://vigco.co/la-com-inv/vi/Rn4u2Uep" target="_blank" rel="noopener" class="abtn abtn-gold"><span class="abtn-border"></span><span class="abtn-label">Mở Tài Khoản & CopyTrade</span></a>
+              <a href="https://vigco.co/la-com-inv/vi/Rn4u2Uep" target="_blank" rel="noopener" class="abtn abtn-ghost" style="font-size:.7rem;padding:10px 24px"><span class="abtn-border"></span><span class="abtn-label">Copy Ngay →</span></a>
+            </div>
           </div>
         </div>
       </div>
-      <div class="vid-ph"><span style="font-size:1.6rem">📹</span><p>Video phân tích · XTO Speed — Sắp ra mắt</p></div>
+      <div class="vid-ph"><span style="font-size:1.6rem">📹</span><p>Video phân tích · XTO Capital XAUUSD — Sắp ra mắt</p></div>
     </div>
+    <!-- CRYPTO TAB -->
     <div class="cpanel" id="cp1">
       <div class="sc-card">
         <div class="sc-head">
           <div class="sc-ident">
-            <div class="sc-av" style="background:linear-gradient(135deg,#7f1d1d,#ef4444)">XS</div>
+            <div class="sc-av" style="background:linear-gradient(135deg,#1e3a8a,#f59e0b)">XC</div>
             <div>
-              <div class="sc-name">XTO Speed</div>
-              <div class="sc-tag">Chiến lược tốc độ · Tối đa hóa lợi nhuận</div>
-              <div class="sc-badges"><span class="badge badge-live">● Live</span><span class="badge badge-speed">⚡ Tốc Độ</span></div>
+              <div class="sc-name">XTO Capital (Crypto)</div>
+              <div class="sc-tag">Crypto CopyTrade · Binance · Đa coin</div>
+              <div class="sc-badges"><span class="badge badge-live">● Live</span><span class="badge badge-crypto">₿ Crypto</span></div>
             </div>
           </div>
           <div class="sc-pnl">
@@ -595,23 +654,27 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
             <div class="sc-s"><span class="sc-sv">72%</span><span class="sc-sl">Win Rate</span></div>
             <div class="sc-s"><span class="sc-sv">15%</span><span class="sc-sl">Max DD</span></div>
             <div class="sc-s"><span class="sc-sv" style="font-size:1rem">Cao</span><span class="sc-sl">Tần suất</span></div>
-            <div class="sc-s"><span class="sc-sv" style="font-size:1rem">Vantage</span><span class="sc-sl">Nền tảng</span></div>
+            <div class="sc-s"><span class="sc-sv" style="font-size:1rem">Binance</span><span class="sc-sl">Nền tảng</span></div>
           </div>
-          <div class="sc-notes" style="border-left-color:#ef4444">
-            <div class="sc-notes-t" style="color:#f87272">Thông Số Vận Hành</div>
+          <div class="sc-notes" style="border-left-color:#f59e0b">
+            <div class="sc-notes-t" style="color:#fbbf24">Thông Số Vận Hành</div>
             <ul style="list-style:none">
-              <li>Lợi nhuận mục tiêu: <strong style="color:#f87272">5% – 10% mỗi ngày</strong></li>
-              <li>Max Drawdown cho phép: <strong style="color:#f87272">35%</strong></li>
-              <li>Phù hợp nhà đầu tư chấp nhận <strong style="color:#f87272">rủi ro cao</strong></li>
+              <li>Nền tảng: <strong style="color:#fbbf24">Binance CopyTrade</strong></li>
+              <li>Lợi nhuận mục tiêu: <strong style="color:#fbbf24">5% – 10% mỗi ngày</strong></li>
+              <li>Max Drawdown cho phép: <strong style="color:#fbbf24">35%</strong></li>
+              <li>Phù hợp nhà đầu tư chấp nhận <strong style="color:#fbbf24">rủi ro trung bình – cao</strong></li>
             </ul>
           </div>
           <div class="sc-cta">
-            <div class="sc-cta-txt">Kết nối Vantage Markets — lợi nhuận cao, rủi ro cần kiểm soát kỹ lưỡng.</div>
-            <a href="https://vigco.co/la-com-inv/vi/Rn4u2Uep" target="_blank" rel="noopener" class="abtn abtn-gold" style="background:linear-gradient(135deg,#7f1d1d,#ef4444,#f87272);box-shadow:0 0 24px rgba(239,68,68,.4)"><span class="abtn-border"></span><span class="abtn-label">Mở Tài Khoản & CopyTrade</span></a>
+            <div class="sc-cta-txt">Kết nối tài khoản Binance và bắt đầu CopyTrade chiến lược Crypto của XTO Capital.</div>
+            <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end">
+              <a href="https://www.binance.com/register?ref=13632985" target="_blank" rel="noopener" class="abtn abtn-gold" style="background:linear-gradient(135deg,#92400e,#f59e0b,#fbbf24);box-shadow:0 0 24px rgba(245,158,11,.4)"><span class="abtn-border"></span><span class="abtn-label">Mở Tài Khoản & CopyTrade</span></a>
+              <a href="https://www.binance.com/register?ref=13632985" target="_blank" rel="noopener" class="abtn abtn-ghost" style="font-size:.7rem;padding:10px 24px;border-color:rgba(245,158,11,.4);color:#fbbf24"><span class="abtn-border"></span><span class="abtn-label">Copy Ngay →</span></a>
+            </div>
           </div>
         </div>
       </div>
-      <div class="vid-ph"><span style="font-size:1.6rem">📹</span><p>Video phân tích · XTO Speed — Sắp ra mắt</p></div>
+      <div class="vid-ph"><span style="font-size:1.6rem">📹</span><p>Video phân tích · XTO Capital Crypto — Sắp ra mắt</p></div>
     </div>
   </div>
   <div class="ctp-contact">
@@ -621,6 +684,225 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
       <a href="https://youtube.com/@tcode.tradingtech?si=0rEJGnZu0V4AQXnC" target="_blank" rel="noopener" class="litem"><span>Youtube — @tcode.tradingtech</span><span class="ar">→</span></a>
       <a href="https://t.me/tCode_T95" target="_blank" rel="noopener" class="litem"><span>Telegram — @tCode_T95</span><span class="ar">→</span></a>
       <a href="https://zalo.me/0964822327" target="_blank" rel="noopener" class="litem"><span>Zalo — 0964 822 327</span><span class="ar">→</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════
+     BOT SERVICE FULLPAGE
+══════════════════════ -->
+<div class="bsp" id="botPage">
+  <div class="bsp-nav">
+    <div class="logo" style="font-size:1.1rem;background:linear-gradient(135deg,#93c5fd,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">tCode<span class="logo-sub" style="-webkit-text-fill-color:rgba(147,197,253,.45)">BOT DEV · THEO YÊU CẦU</span></div>
+    <button class="bsp-back" onclick="closeBSP()">← Quay Lại</button>
+  </div>
+  <div class="bsp-hero">
+    <h1>Dịch Vụ Viết Bot<br>Theo Yêu Cầu</h1>
+    <p>Bot giao dịch tự động được lập trình theo đúng chiến lược và yêu cầu riêng của bạn. Hỗ trợ MT4/MT5, Binance, Bybit và các sàn phổ biến — bàn giao mã nguồn, hỗ trợ sau triển khai.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="https://t.me/tCode_T95" target="_blank" rel="noopener" class="abtn abtn-blue"><span class="abtn-border"></span><span class="abtn-label">Liên Hệ Telegram →</span></a>
+      <a href="https://zalo.me/0964822327" target="_blank" rel="noopener" class="abtn abtn-ghost" style="border-color:rgba(59,130,246,.4);color:#93c5fd"><span class="abtn-border"></span><span class="abtn-label">Liên Hệ Zalo →</span></a>
+    </div>
+  </div>
+  <div class="bsp-body">
+    <!-- SERVICES -->
+    <div class="bsp-section">
+      <div class="bsp-section-title">Dịch Vụ Chính</div>
+      <div class="bsp-services-grid">
+        <div class="bsp-svc">
+          <span class="bsp-svc-icon">🤖</span>
+          <div class="bsp-svc-name">Auto Trade Bot</div>
+          <div class="bsp-svc-tags">
+            <span class="bsp-tag">Auto Trade</span>
+            <span class="bsp-tag">Copy</span>
+            <span class="bsp-tag">DCA</span>
+            <span class="bsp-tag">FTMO</span>
+          </div>
+          <p class="bsp-svc-desc">Bot tự động giao dịch hoàn toàn theo chiến lược của bạn — từ scalping, swing, DCA đến các bot đặc thù cho prop firm như FTMO. Hỗ trợ MT4/MT5 và các sàn Crypto phổ biến.</p>
+        </div>
+        <div class="bsp-svc">
+          <span class="bsp-svc-icon">📊</span>
+          <div class="bsp-svc-name">Scanner & Dashboard</div>
+          <div class="bsp-svc-tags">
+            <span class="bsp-tag">Scanner</span>
+            <span class="bsp-tag">Alert</span>
+            <span class="bsp-tag">Panel</span>
+            <span class="bsp-tag">Dashboard</span>
+          </div>
+          <p class="bsp-svc-desc">Công cụ quét thị trường realtime, cảnh báo tín hiệu, panel điều khiển trực quan và dashboard theo dõi portfolio — hiển thị trực tiếp trên chart MetaTrader.</p>
+        </div>
+        <div class="bsp-svc">
+          <span class="bsp-svc-icon">🛠️</span>
+          <div class="bsp-svc-name">Tư Vấn & Hỗ Trợ</div>
+          <div class="bsp-svc-tags">
+            <span class="bsp-tag">Consulting</span>
+            <span class="bsp-tag">VPS</span>
+            <span class="bsp-tag">Debug</span>
+            <span class="bsp-tag">Support</span>
+          </div>
+          <p class="bsp-svc-desc">Tư vấn chiến lược, hỗ trợ cài đặt VPS, debug và tối ưu bot hiện có, hỗ trợ 24/7 sau khi bàn giao. Cam kết đồng hành xuyên suốt quá trình triển khai.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECH STACK -->
+    <div class="bsp-section">
+      <div class="bsp-section-title">Tech Stack</div>
+      <div class="bsp-tech-grid">
+        <span class="bsp-tech-badge">MQL4</span>
+        <span class="bsp-tech-badge">MQL5</span>
+        <span class="bsp-tech-badge">MetaTrader 4</span>
+        <span class="bsp-tech-badge">MetaTrader 5</span>
+        <span class="bsp-tech-badge">Canvas UI</span>
+        <span class="bsp-tech-badge">AI API</span>
+        <span class="bsp-tech-badge">WebSocket</span>
+        <span class="bsp-tech-badge">Telegram Bot</span>
+        <span class="bsp-tech-badge">JSON</span>
+        <span class="bsp-tech-badge">Binance API</span>
+        <span class="bsp-tech-badge">Bybit API</span>
+      </div>
+    </div>
+
+    <!-- QUY TRÌNH -->
+    <div class="bsp-section">
+      <div class="bsp-section-title">Quy Trình Làm Việc</div>
+      <div class="bsp-process-grid">
+        <div class="bsp-step">
+          <div class="bsp-step-num">01</div>
+          <span class="bsp-step-icon">💬</span>
+          <div class="bsp-step-name">Tư Vấn</div>
+          <p class="bsp-step-desc">Mô tả chiến lược và yêu cầu. tCode phân tích tính khả thi và báo giá.</p>
+        </div>
+        <div class="bsp-step">
+          <div class="bsp-step-num">02</div>
+          <span class="bsp-step-icon">⚙️</span>
+          <div class="bsp-step-name">Phát Triển</div>
+          <p class="bsp-step-desc">Viết bot theo spec đã thống nhất. Cập nhật tiến độ thường xuyên.</p>
+        </div>
+        <div class="bsp-step">
+          <div class="bsp-step-num">03</div>
+          <span class="bsp-step-icon">🧪</span>
+          <div class="bsp-step-name">Backtesting</div>
+          <p class="bsp-step-desc">Chạy backtest, tối ưu tham số, kiểm tra trên dữ liệu thực.</p>
+        </div>
+        <div class="bsp-step">
+          <div class="bsp-step-num">04</div>
+          <span class="bsp-step-icon">🚀</span>
+          <div class="bsp-step-name">Bàn Giao</div>
+          <p class="bsp-step-desc">Bàn giao mã nguồn, hướng dẫn cài đặt và hỗ trợ sau triển khai.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="bsp-cta-box">
+      <h3>Sẵn Sàng Bắt Đầu?</h3>
+      <p>Liên hệ ngay để được tư vấn miễn phí. tCode sẽ phân tích chiến lược và đề xuất giải pháp phù hợp nhất cho bạn.</p>
+      <div class="bsp-cta-links">
+        <a href="https://t.me/tCode_T95" target="_blank" rel="noopener" class="abtn abtn-blue"><span class="abtn-border"></span><span class="abtn-label">Telegram →</span></a>
+        <a href="https://zalo.me/0964822327" target="_blank" rel="noopener" class="abtn abtn-ghost" style="border-color:rgba(59,130,246,.35);color:#93c5fd"><span class="abtn-border"></span><span class="abtn-label">Zalo →</span></a>
+        <a href="mailto:tcodefx.auto@gmail.com" class="abtn abtn-ghost" style="border-color:rgba(59,130,246,.35);color:#93c5fd"><span class="abtn-border"></span><span class="abtn-label">Email →</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════
+     EA DETAIL FULLPAGE
+══════════════════════ -->
+<div class="esp" id="eaPage">
+  <div class="esp-nav">
+    <div class="logo" style="font-size:1.1rem">tCode<span class="logo-sub">XTO SPEED AI · EA CHUYÊN NGHIỆP</span></div>
+    <button class="esp-back" onclick="closeESP()">← Quay Lại</button>
+  </div>
+  <div class="esp-hero">
+    <h1>XTO Speed AI<br>Expert Advisor</h1>
+    <p>Expert Advisor độc quyền tích hợp trí tuệ nhân tạo — giao dịch tự động 24/7, tốc độ dưới 1ms, win rate ổn định trên 72%. Đã pass quỹ quốc tế FTMO và E8.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <button class="abtn abtn-gold" onclick="openCT()"><span class="abtn-border"></span><span class="abtn-label">Xem CopyTrade →</span></button>
+      <button class="abtn abtn-ghost" onclick="openContact()"><span class="abtn-border"></span><span class="abtn-label">Liên Hệ Ngay</span></button>
+    </div>
+  </div>
+  <div class="esp-body">
+    <!-- METRICS -->
+    <div class="esp-section">
+      <div class="esp-section-title">Chỉ Số Hiệu Suất</div>
+      <div class="esp-metrics">
+        <div class="esp-metric"><span class="esp-mv">360<sup style="font-size:.8rem;color:rgba(240,192,74,.55)">+</sup></span><span class="esp-ml">Lệnh / Ngày</span></div>
+        <div class="esp-metric"><span class="esp-mv">72<sup style="font-size:.8rem;color:rgba(240,192,74,.55)">%</sup></span><span class="esp-ml">Win Rate</span></div>
+        <div class="esp-metric"><span class="esp-mv">24<sup style="font-size:.8rem;color:rgba(240,192,74,.55)">/7</sup></span><span class="esp-ml">Hoạt động</span></div>
+        <div class="esp-metric"><span class="esp-mv">16<sup style="font-size:.8rem;color:rgba(240,192,74,.55)">%</sup></span><span class="esp-ml">Max DD</span></div>
+        <div class="esp-metric"><span class="esp-mv">&lt;1<sup style="font-size:.8rem;color:rgba(240,192,74,.55)">ms</sup></span><span class="esp-ml">Tốc độ lệnh</span></div>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="esp-section">
+      <div class="esp-section-title">Tính Năng Nổi Bật</div>
+      <div class="esp-feats">
+        <div class="esp-feat">
+          <span class="esp-feat-icon">🧠</span>
+          <div class="esp-feat-name">AI Decision Engine</div>
+          <p class="esp-feat-desc">Trí tuệ nhân tạo phân tích hàng triệu điểm dữ liệu realtime — nhận diện pattern, tối ưu điểm vào lệnh và quản lý rủi ro tự động.</p>
+        </div>
+        <div class="esp-feat">
+          <span class="esp-feat-icon">⚡</span>
+          <div class="esp-feat-name">Tốc Độ Khớp Lệnh &lt;1ms</div>
+          <p class="esp-feat-desc">Thực thi lệnh trong dưới 1 millisecond — không trượt giá, không lag, không cảm xúc. Lợi thế cạnh tranh tuyệt đối trên thị trường.</p>
+        </div>
+        <div class="esp-feat">
+          <span class="esp-feat-icon">🛡️</span>
+          <div class="esp-feat-name">Risk Management</div>
+          <p class="esp-feat-desc">Hệ thống quản lý rủi ro nhiều lớp — stop loss tự động, drawdown control, position sizing thông minh theo biến động thị trường.</p>
+        </div>
+        <div class="esp-feat">
+          <span class="esp-feat-icon">📡</span>
+          <div class="esp-feat-name">Market Intelligence</div>
+          <p class="esp-feat-desc">Thu thập và phân tích dữ liệu thị trường realtime — giá, khối lượng, biến động, sentiment — làm đầu vào liên tục cho AI engine.</p>
+        </div>
+        <div class="esp-feat">
+          <span class="esp-feat-icon">🏆</span>
+          <div class="esp-feat-name">Đã Pass Quỹ Quốc Tế</div>
+          <p class="esp-feat-desc">Chiến lược đã được kiểm chứng qua các quỹ quốc tế FTMO và E8 — xác nhận tính ổn định và hiệu suất thực tế trong điều kiện thị trường thực.</p>
+        </div>
+        <div class="esp-feat">
+          <span class="esp-feat-icon">📲</span>
+          <div class="esp-feat-name">Cài Đặt Đơn Giản</div>
+          <p class="esp-feat-desc">Tương thích MT4/MT5, cài đặt trong vài bước đơn giản. Có video hướng dẫn chi tiết và hỗ trợ trực tiếp từ tCode.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERFORMANCE -->
+    <div class="esp-section">
+      <div class="esp-section-title">Kết Quả Thực Tế</div>
+      <div style="background:var(--b3);border:1px solid rgba(201,151,42,.15);padding:24px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="border-left:3px solid var(--gold);padding-left:16px">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#4ade80;line-height:1">+52%</div>
+            <div style="font-size:.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px">Lợi nhuận hiện tại · An Toàn</div>
+            <p style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.5">Mục tiêu 1.5–3%/ngày · SL max 15% · Drawdown 16% · Phù hợp đầu tư dài hạn, thận trọng.</p>
+          </div>
+          <div style="border-left:3px solid #ef4444;padding-left:16px">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#f87272;line-height:1">+103%</div>
+            <div style="font-size:.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px">Lợi nhuận hiện tại · Tốc Độ</div>
+            <p style="font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.5">Mục tiêu 5–10%/ngày · Drawdown max 35% · Phù hợp nhà đầu tư chấp nhận rủi ro cao.</p>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(201,151,42,.1);font-size:.72rem;color:rgba(255,255,255,.3);font-style:italic;text-align:center">
+          Từng đạt +300% trong vòng 1 năm (2023–2024). Kết quả quá khứ không đảm bảo lợi nhuận tương lai.
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="esp-cta-box">
+      <h3>Bắt Đầu Với XTO Speed</h3>
+      <p>Mở tài khoản Vantage Markets và kết nối CopyTrade — hoặc liên hệ để được hỗ trợ cài đặt EA trực tiếp.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="abtn abtn-gold" onclick="openCT()"><span class="abtn-border"></span><span class="abtn-label">Xem CopyTrade →</span></button>
+        <button class="abtn abtn-ghost" onclick="openContact()"><span class="abtn-border"></span><span class="abtn-label">Liên Hệ Tư Vấn</span></button>
+      </div>
     </div>
   </div>
 </div>
@@ -656,26 +938,22 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
       <span class="hero-x">T</span>
       <span class="hero-back"><span class="ch">C</span><span class="ch">O</span><span class="ch">D</span><span class="ch">E</span></span>
     </div>
-
     <p class="hero-tagline">Bot Dev · XTO Speed AI · CopyTrade</p>
-
     <div class="hero-btns">
       <button class="abtn abtn-gold" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})"><span class="abtn-border"></span><span class="abtn-label">Khám Phá Dịch Vụ</span></button>
       <button class="abtn abtn-ghost" onclick="openContact()"><span class="abtn-border"></span><span class="abtn-label">Liên Hệ Ngay</span></button>
     </div>
-
-    <!-- 3 SERVICE QUICK ACCESS -->
     <div class="hero-services">
       <p class="hs-label">3 dịch vụ chính</p>
       <div class="hs-grid">
-        <div class="hs-item bot" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+        <div class="hs-item bot" onclick="openBSP()">
           <span class="hs-icon">🤖</span>
           <div>
             <span class="hs-name">Viết Bot Theo Yêu Cầu</span>
             <span class="hs-desc">Tự động hóa giao dịch — bot tùy biến theo chiến lược riêng</span>
           </div>
         </div>
-        <div class="hs-item ea" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+        <div class="hs-item ea" onclick="openESP()">
           <span class="hs-icon">⚡</span>
           <div>
             <span class="hs-name">XTO Speed AI</span>
@@ -692,25 +970,20 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
       </div>
     </div>
   </div>
-
   <div class="scroll-hint">
     <span></span>
     <p>Cuộn xuống</p>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     3 SERVICES SECTION
-══════════════════════════════ -->
+<!-- 3 SERVICES SECTION -->
 <section class="services-section ain" id="services">
   <div class="sec-header">
     <span class="sec-tag">Dịch Vụ Chính</span>
     <h2 class="sec-title"><span class="w">Ba Giải Pháp</span> <span class="g">Trading Toàn Diện</span></h2>
     <div class="sec-line"></div>
   </div>
-
   <div class="svc-grid">
-
     <!-- SERVICE 1: BOT TRADING -->
     <div class="svc-card svc-bot">
       <div class="svc-head">
@@ -736,7 +1009,7 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
         <div class="svc-stat"><span class="svc-sv">100%</span><span class="svc-sl">Tùy biến</span></div>
       </div>
       <div class="svc-cta">
-        <a href="https://t.me/tCode_T95" target="_blank" rel="noopener" class="abtn abtn-blue"><span class="abtn-border"></span><span class="abtn-label">Tư Vấn Ngay →</span></a>
+        <button class="abtn abtn-blue" onclick="openBSP()"><span class="abtn-border"></span><span class="abtn-label">Xem Chi Tiết →</span></button>
       </div>
     </div>
 
@@ -765,7 +1038,7 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
         <div class="svc-stat"><span class="svc-sv">&lt;1ms</span><span class="svc-sl">Tốc Độ</span></div>
       </div>
       <div class="svc-cta">
-        <button class="abtn abtn-gold" onclick="document.getElementById('flow').scrollIntoView({behavior:'smooth'})"><span class="abtn-border"></span><span class="abtn-label">Xem Chi Tiết →</span></button>
+        <button class="abtn abtn-gold" onclick="openESP()"><span class="abtn-border"></span><span class="abtn-label">Xem Chi Tiết →</span></button>
       </div>
     </div>
 
@@ -781,23 +1054,22 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
       <div class="svc-divider"></div>
       <div class="svc-features">
         <ul class="svc-feat-list">
-          <li><span class="dot"></span><strong style="color:var(--gp)">(An Toàn):</strong> +52% lợi nhuận, drawdown 16%</li>
-          <li><span class="dot"></span><strong style="color:#f87272">Speed (Tốc Độ):</strong> +103% lợi nhuận, mục tiêu 5–10%/ngày</li>
-          <li><span class="dot"></span>Thực hiện trên Vantage Markets — sàn uy tín quốc tế</li>
+          <li><span class="dot"></span><strong style="color:var(--gp)">Forex (XAUUSD):</strong> XTO Capital — Vantage Markets</li>
+          <li><span class="dot"></span><strong style="color:#fbbf24">Crypto:</strong> XTO Capital Crypto — Binance CopyTrade</li>
           <li><span class="dot"></span>Sao chép 100% tự động, không cần can thiệp thủ công</li>
           <li><span class="dot"></span>Minh bạch số liệu realtime, rút vốn bất kỳ lúc nào</li>
+          <li><span class="dot"></span>Win rate 72%+, hỗ trợ 24/7</li>
         </ul>
       </div>
       <div class="svc-stats-row">
-        <div class="svc-stat"><span class="svc-sv">+52%</span><span class="svc-sl"></span></div>
-        <div class="svc-stat"><span class="svc-sv">+103%</span><span class="svc-sl">Speed</span></div>
+        <div class="svc-stat"><span class="svc-sv">+52%</span><span class="svc-sl">Forex</span></div>
+        <div class="svc-stat"><span class="svc-sv">+103%</span><span class="svc-sl">Crypto</span></div>
         <div class="svc-stat"><span class="svc-sv">24/7</span><span class="svc-sl">Auto</span></div>
       </div>
       <div class="svc-cta">
         <button class="abtn abtn-gold" onclick="openCT()" style="background:linear-gradient(135deg,#14532d,#16a34a,#4ade80);color:#000;box-shadow:0 0 20px rgba(74,222,128,.3)"><span class="abtn-border"></span><span class="abtn-label">Đăng Ký CopyTrade →</span></button>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -828,27 +1100,45 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
 <section class="partners ain">
   <p class="partners-label">Đối Tác Chính Thức</p>
   <div class="partners-grid">
-    <div class="pcard p-bin"><svg viewBox="0 0 24 24" fill="#F3BA2F" height="26"><path d="M12 1.5L7.5 6l1.5 1.5L12 4.5l3 3L16.5 6 12 1.5zM6 7.5L4.5 9 6 10.5 7.5 9 6 7.5zm0 6L4.5 15 6 16.5 7.5 15 6 13.5zm6 4.5l-3-3-1.5 1.5L12 22.5l4.5-4.5L15 16.5l-3 3zm6-4.5L16.5 15 18 16.5 19.5 15 18 13.5zm0-6L16.5 9 18 10.5 19.5 9 18 7.5zM12 9l-3 3 3 3 3-3-3-3z"/></svg><span class="pn">Binance</span></div>
-    <div class="pcard p-byb"><svg viewBox="0 0 32 32" height="24" fill="#F7A600"><rect x="4" y="8" width="6" height="16" rx="1"/><rect x="13" y="8" width="6" height="7" rx="1"/><rect x="13" y="18" width="6" height="6" rx="1"/><rect x="22" y="8" width="6" height="16" rx="1"/></svg><span class="pn">Bybit</span></div>
-    <div class="pcard p-exn"><svg viewBox="0 0 32 32" height="24" fill="none"><circle cx="16" cy="16" r="10" stroke="#FF6600" stroke-width="3"/><path d="M8 16h16M16 8v16" stroke="#FF6600" stroke-width="2.5"/></svg><span class="pn">Exness</span></div>
-    <div class="pcard p-van"><svg viewBox="0 0 32 32" height="24"><polygon points="16,4 29,27 3,27" fill="none" stroke="#FF3B30" stroke-width="2.5"/><polygon points="16,13 22,24 10,24" fill="#FF3B30"/></svg><span class="pn">Vantage</span></div>
-    <div class="pcard p-xm"><svg viewBox="0 0 32 32" height="24" fill="#DD0000"><path d="M4 8L14 16 4 24 8 24 16 18 24 24 28 24 18 16 28 8 24 8 16 14 8 8Z"/></svg><span class="pn">XM</span></div>
-    <div class="pcard p-okx"><svg viewBox="0 0 32 32" height="24" fill="#bbb"><rect x="3" y="3" width="10" height="10" rx="1"/><rect x="19" y="3" width="10" height="10" rx="1"/><rect x="3" y="19" width="10" height="10" rx="1"/><rect x="19" y="19" width="10" height="10" rx="1"/></svg><span class="pn">OKX</span></div>
+    <a href="https://www.binance.com/register?ref=13632985" target="_blank" rel="noopener" class="pcard p-bin">
+      <svg viewBox="0 0 24 24" fill="#F3BA2F" height="26"><path d="M12 1.5L7.5 6l1.5 1.5L12 4.5l3 3L16.5 6 12 1.5zM6 7.5L4.5 9 6 10.5 7.5 9 6 7.5zm0 6L4.5 15 6 16.5 7.5 15 6 13.5zm6 4.5l-3-3-1.5 1.5L12 22.5l4.5-4.5L15 16.5l-3 3zm6-4.5L16.5 15 18 16.5 19.5 15 18 13.5zm0-6L16.5 9 18 10.5 19.5 9 18 7.5zM12 9l-3 3 3 3 3-3-3-3z"/></svg>
+      <span class="pn">Binance</span>
+    </a>
+    <a href="https://www.bybit.com/invite?ref=N9KRRV" target="_blank" rel="noopener" class="pcard p-byb">
+      <svg viewBox="0 0 32 32" height="24" fill="#F7A600"><rect x="4" y="8" width="6" height="16" rx="1"/><rect x="13" y="8" width="6" height="7" rx="1"/><rect x="13" y="18" width="6" height="6" rx="1"/><rect x="22" y="8" width="6" height="16" rx="1"/></svg>
+      <span class="pn">Bybit</span>
+    </a>
+    <a href="https://one.exnessonelink.com/a/w35l4bg07v" target="_blank" rel="noopener" class="pcard p-exn">
+      <svg viewBox="0 0 32 32" height="24" fill="none"><circle cx="16" cy="16" r="10" stroke="#FF6600" stroke-width="3"/><path d="M8 16h16M16 8v16" stroke="#FF6600" stroke-width="2.5"/></svg>
+      <span class="pn">Exness</span>
+    </a>
+    <a href="https://vigco.co/la-com-inv/vi/Rn4u2Uep" target="_blank" rel="noopener" class="pcard p-van">
+      <svg viewBox="0 0 32 32" height="24"><polygon points="16,4 29,27 3,27" fill="none" stroke="#FF3B30" stroke-width="2.5"/><polygon points="16,13 22,24 10,24" fill="#FF3B30"/></svg>
+      <span class="pn">Vantage</span>
+    </a>
+    <a href="https://puvip.co/la-partners/vn/iHTIP6mp" target="_blank" rel="noopener" class="pcard p-pup">
+      <svg viewBox="0 0 32 32" height="24" fill="#0033CC"><circle cx="16" cy="16" r="11" fill="none" stroke="#0033CC" stroke-width="2.5"/><text x="16" y="20" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="#0033CC">PU</text></svg>
+      <span class="pn">PU Prime</span>
+    </a>
+    <a href="https://www.okx.com/vi/join/63301002" target="_blank" rel="noopener" class="pcard p-okx">
+      <svg viewBox="0 0 32 32" height="24" fill="#bbb"><rect x="3" y="3" width="10" height="10" rx="1"/><rect x="19" y="3" width="10" height="10" rx="1"/><rect x="3" y="19" width="10" height="10" rx="1"/><rect x="19" y="19" width="10" height="10" rx="1"/></svg>
+      <span class="pn">OKX</span>
+    </a>
   </div>
 </section>
 
-<!-- COPYTRADE -->
+<!-- COPYTRADE SECTION -->
 <section class="copytrade-section ain" id="copytrade">
   <div class="ct-inner">
     <div class="ct-card-wrap ain" style="animation:flt 5s ease-in-out infinite">
       <div class="ct-card">
         <div class="ct-hdr">
-          <div class="ct-ident"><div class="ct-av">XC</div><div class="ct-name">XTO Speed<span>An Toàn · Ổn định</span></div></div>
+          <div class="ct-ident"><div class="ct-av">XC</div><div class="ct-name">XTO Capital<span>XAUUSD · Crypto · Tự động</span></div></div>
           <div class="ct-live">● LIVE</div>
         </div>
         <div class="ct-stats">
-          <div class="ct-stat"><span class="ct-sv">+52%</span><span class="ct-sl">Hiện tại</span></div>
-          <div class="ct-stat"><span class="ct-sv">16%</span><span class="ct-sl">Drawdown</span></div>
+          <div class="ct-stat"><span class="ct-sv">+52%</span><span class="ct-sl">Forex</span></div>
+          <div class="ct-stat"><span class="ct-sv">+103%</span><span class="ct-sl">Crypto</span></div>
           <div class="ct-stat"><span class="ct-sv">72%</span><span class="ct-sl">Win Rate</span></div>
         </div>
         <div class="ct-chart">
@@ -858,50 +1148,52 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
       </div>
     </div>
     <div class="ct-content ain">
-      <span class="flow-tag">CopyTrade · XTO Speed </span>
+      <span class="flow-tag">CopyTrade · XTO Capital</span>
       <h2><span class="w">Sao Chép Nhà Đầu Tư<br>Đã </span><span class="g">Pass Quỹ</span><span class="w"> Quốc Tế</span></h2>
       <p>Không cần kinh nghiệm, không cần theo dõi liên tục. Kết nối trực tiếp với những nhà giao dịch chuyên nghiệp đã được kiểm chứng qua các quỹ quốc tế FTMO, E8.</p>
       <ul class="ct-list">
-        <li><strong style="color:var(--gp)">XTO River (An Toàn):</strong> +52% lợi nhuận, win rate 72%, drawdown chỉ 16%</li>
-        <li><strong style="color:#f87272">XTO Speed (Tốc Độ):</strong> +103% lợi nhuận, win rate 72%, mục tiêu 5–10%/ngày</li>
-        <li>Thực hiện trực tiếp trên Vantage Markets — sàn uy tín quốc tế</li>
-        <li>Sao chép 100% tự động qua hệ thống CopyTrade của Vantage</li>
+        <li><strong style="color:var(--gp)">Forex CopyTrade — XTO Capital (XAUUSD):</strong> +52% lợi nhuận, win rate 72%, drawdown 16% · Vantage Markets</li>
+        <li><strong style="color:#fbbf24">Crypto CopyTrade — XTO Capital (Crypto):</strong> +103% lợi nhuận, win rate 72%, mục tiêu 5–10%/ngày · Binance</li>
+        <li>Sao chép 100% tự động — không cần can thiệp thủ công</li>
+        <li>Minh bạch số liệu realtime, rút vốn bất kỳ lúc nào</li>
       </ul>
       <button class="abtn abtn-gold" onclick="openCT()" style="border:none"><span class="abtn-border"></span><span class="abtn-label">Xem Chi Tiết & Đăng Ký</span></button>
     </div>
   </div>
   <div class="strategies ain">
+    <!-- Forex Strategy -->
     <div class="strat">
       <div class="strat-accent"></div>
       <div class="strat-header">
-        <div class="strat-name">XTO River</div>
-        <span class="strat-type strat-safe">🛡️ An Toàn</span>
+        <div class="strat-name">XTO Capital (XAUUSD)</div>
+        <span class="strat-type strat-safe">📈 Forex</span>
       </div>
       <span class="strat-pnl">+52%</span>
-      <span class="strat-pnl-note">Từng đạt +300% trong vòng 1 năm (2023–2024)</span>
+      <span class="strat-pnl-note">Từng đạt +300% trong vòng 1 năm (2023–2024) · Nền tảng: Vantage Markets</span>
       <div class="strat-grid">
         <div class="strat-stat"><span class="strat-sv">72%</span><span class="strat-sl">Win Rate</span></div>
         <div class="strat-stat"><span class="strat-sv">16%</span><span class="strat-sl">Drawdown</span></div>
         <div class="strat-stat"><span class="strat-sv">360</span><span class="strat-sl">Lệnh/Ngày</span></div>
       </div>
       <div class="strat-notes"><p>Mục tiêu <strong style="color:var(--gl)">1.5–3%/ngày</strong> · SL max <strong style="color:var(--gl)">15%</strong> · Phù hợp nhà đầu tư thận trọng</p></div>
-      <a href="https://vigco.co/la-com-inv/vi/Rn4u2Uep" target="_blank" rel="noopener" class="strat-btn btn-safe">Mở Tài Khoản & CopyTrade</a>
+      <a href="https://vigco.co/la-com-inv/vi/Rn4u2Uep" target="_blank" rel="noopener" class="strat-btn btn-safe">Mở Tài Khoản Vantage & CopyTrade</a>
     </div>
+    <!-- Crypto Strategy -->
     <div class="strat">
-      <div class="strat-accent" style="background:linear-gradient(90deg,transparent,#ef4444,transparent)"></div>
+      <div class="strat-accent" style="background:linear-gradient(90deg,transparent,#f59e0b,transparent)"></div>
       <div class="strat-header">
-        <div class="strat-name">XTO Speed</div>
-        <span class="strat-type strat-speed">⚡ Tốc Độ</span>
+        <div class="strat-name">XTO Capital (Crypto)</div>
+        <span class="strat-type" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:#fbbf24">₿ Crypto</span>
       </div>
-      <span class="strat-pnl">+103%</span>
-      <span class="strat-pnl-note">Từng đạt +300% trong một giai đoạn trước đó</span>
+      <span class="strat-pnl" style="color:#fbbf24">+103%</span>
+      <span class="strat-pnl-note">Từng đạt +300% trong một giai đoạn trước đó · Nền tảng: Binance</span>
       <div class="strat-grid">
         <div class="strat-stat"><span class="strat-sv">72%</span><span class="strat-sl">Win Rate</span></div>
         <div class="strat-stat"><span class="strat-sv">15%</span><span class="strat-sl">Drawdown</span></div>
         <div class="strat-stat"><span class="strat-sv" style="font-size:.9rem">Cao</span><span class="strat-sl">Tần suất</span></div>
       </div>
-      <div class="strat-notes" style="border-left-color:#ef4444"><p>Mục tiêu <strong style="color:#f87272">5–10%/ngày</strong> · Drawdown max <strong style="color:#f87272">35%</strong> · Chấp nhận rủi ro cao</p></div>
-      <a href="https://vigco.co/la-com-inv/vi/Rn4u2Uep" target="_blank" rel="noopener" class="strat-btn btn-speed">Mở Tài Khoản & CopyTrade</a>
+      <div class="strat-notes" style="border-left-color:#f59e0b"><p>Mục tiêu <strong style="color:#fbbf24">5–10%/ngày</strong> · Drawdown max <strong style="color:#fbbf24">35%</strong> · Chấp nhận rủi ro cao</p></div>
+      <a href="https://www.binance.com/register?ref=13632985" target="_blank" rel="noopener" class="strat-btn" style="background:linear-gradient(135deg,#92400e,#f59e0b,#fbbf24);color:#000">Mở Tài Khoản Binance & CopyTrade</a>
     </div>
   </div>
 </section>
@@ -915,7 +1207,7 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
   </div>
   <div class="steps-row">
     <div class="step"><div class="step-n"><span>01</span></div><div class="step-text"><h3>Liên Hệ Tư Vấn</h3><p>Nhắn tin qua Telegram hoặc Zalo để được tư vấn dịch vụ phù hợp — Bot, EA hay CopyTrade.</p></div></div>
-    <div class="step"><div class="step-n"><span>02</span></div><div class="step-text"><h3>Đăng Ký & Kết Nối</h3><p>Mở tài khoản Vantage Markets hoặc nhận EA theo yêu cầu. Toàn bộ quy trình được hỗ trợ trực tiếp.</p></div></div>
+    <div class="step"><div class="step-n"><span>02</span></div><div class="step-text"><h3>Đăng Ký & Kết Nối</h3><p>Mở tài khoản Vantage Markets hoặc Binance, hoặc nhận EA theo yêu cầu. Toàn bộ quy trình được hỗ trợ trực tiếp.</p></div></div>
     <div class="step"><div class="step-n"><span>03</span></div><div class="step-text"><h3>Nhận Lợi Nhuận</h3><p>Hệ thống tự động vận hành 24/7. Theo dõi số liệu realtime và rút vốn bất kỳ lúc nào.</p></div></div>
   </div>
 </section>
@@ -939,8 +1231,8 @@ footer{background:var(--b2);border-top:1px solid rgba(201,151,42,.1);padding:48p
       <p>Bot Trading theo yêu cầu · XTO Speed AI · CopyTrade từ trader đã pass quỹ quốc tế.</p>
     </div>
     <div class="ft-col"><h4>Dịch Vụ</h4><ul>
-      <li><a href="#services">Viết Bot Theo Yêu Cầu</a></li>
-      <li><a href="#flow">EA XTO Speed</a></li>
+      <li><a href="#" onclick="openBSP();return false">Viết Bot Theo Yêu Cầu</a></li>
+      <li><a href="#" onclick="openESP();return false">EA XTO Speed</a></li>
       <li><a href="#" onclick="openCT();return false">CopyTrade</a></li>
       <li><a href="#how">Cách Bắt Đầu</a></li>
     </ul></div>
@@ -1065,8 +1357,16 @@ if(flowSec)flowObs.observe(flowSec);
 /* MODALS */
 function openContact(){document.getElementById('contactModal').classList.add('open');document.body.style.overflow='hidden'}
 function closeContact(){document.getElementById('contactModal').classList.remove('open');document.body.style.overflow=''}
+
 function openCT(){document.getElementById('ctPage').classList.add('open');document.body.style.overflow='hidden';document.getElementById('ctPage').scrollTop=0}
 function closeCT(){document.getElementById('ctPage').classList.remove('open');document.body.style.overflow=''}
+
+function openBSP(){document.getElementById('botPage').classList.add('open');document.body.style.overflow='hidden';document.getElementById('botPage').scrollTop=0}
+function closeBSP(){document.getElementById('botPage').classList.remove('open');document.body.style.overflow=''}
+
+function openESP(){document.getElementById('eaPage').classList.add('open');document.body.style.overflow='hidden';document.getElementById('eaPage').scrollTop=0}
+function closeESP(){document.getElementById('eaPage').classList.remove('open');document.body.style.overflow=''}
+
 function switchTab(i){document.querySelectorAll('.ctab').forEach((t,j)=>t.classList.toggle('active',j===i));document.querySelectorAll('.cpanel').forEach((p,j)=>p.classList.toggle('active',j===i))}
 
 /* MOBILE NAV */
@@ -1078,7 +1378,7 @@ function closeMob(){mobNav.classList.remove('open');hamBtn.classList.remove('ope
 let fabOpen=false;
 function toggleFab(){fabOpen=!fabOpen;document.getElementById('fabMenu').classList.toggle('open',fabOpen);document.getElementById('fabBtn').style.background=fabOpen?'linear-gradient(135deg,#333,#555)':'linear-gradient(135deg,var(--gd),var(--gold),var(--gl))'}
 document.addEventListener('click',e=>{const f=document.getElementById('mobFab');if(fabOpen&&f&&!f.contains(e.target)){fabOpen=false;document.getElementById('fabMenu').classList.remove('open');document.getElementById('fabBtn').style.background=''}});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCT();closeContact();closeMob()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCT();closeBSP();closeESP();closeContact();closeMob()}});
 
 /* FLOAT ANIMATION */
 const style=document.createElement('style');
