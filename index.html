@@ -440,24 +440,23 @@ footer span{color:var(--yel);}
       <div class="tab-pane" id="tab-levels">
         <table class="params-table"><thead><tr><th>THÔNG SỐ</th><th>TẦNG 1 / 2 / 3</th><th>GIẢI THÍCH</th></tr></thead>
         <tbody>
-          <tr><td class="param-name">Ngưỡng lỗ kích hoạt tầng</td><td class="param-default">- / -$2,000 / -$9,000</td><td class="param-desc"><strong>Loss_L2 / L3</strong> — Khi floating loss vượt ngưỡng, EA chuyển tầng tương ứng với chiến lược phục hồi mạnh hơn.</td></tr>
+          <tr><td class="param-name">Ngưỡng lỗ kích hoạt tầng</td><td class="param-default">- / -$2,000 / -$9,000</td><td class="param-desc"><strong>Loss_L2 / L3</strong> — Khi floating âm vượt ngưỡng, EA chuyển tầng tương ứng với chiến lược phục hồi mạnh hơn.</td></tr>
           <tr><td class="param-name">Step (pips) mỗi tầng</td><td class="param-default">120 / 210 / 180</td><td class="param-desc"><strong>Khoảng cách DCA</strong> — Lệnh DCA tiếp theo được mở khi giá cách lệnh hiện tại đúng Step pips.</td></tr>
           <tr><td class="param-name">Phương pháp tăng Lot</td><td class="param-default">lotplus / xlot / lotplus</td><td class="param-desc">lotplus (cộng đều) hoặc xlot (nhân cấp số nhân). L2 dùng xlot 1.6 để phục hồi nhanh.</td></tr>
           <tr><td class="param-name">Chế độ lot</td><td class="param-default">nomal / bu_lot / nomal</td><td class="param-desc"><strong>nomal_lot</strong>: lũy tiến theo thứ tự lệnh. <strong>bu_lot</strong>: bù lot dựa trên khoảng cách giá.</td></tr>
           <tr><td class="param-name">Lot cộng / Hệ số nhân</td><td class="param-default">0.01 / 0.01 / 0.01 & 1.05 / 1.6 / 1.5</td><td class="param-desc">lot_plus (cộng) hoặc LotMulti (nhân). L2 dùng 1.6 — tăng nhanh để thoát lỗ sâu.<span class="badge-imp">RỦI RO CAO</span></td></tr>
           <tr><td class="param-name">Tạm dừng vào lệnh</td><td class="param-default">false / false / false</td><td class="param-desc">Khi true, EA vào tầng nhưng không mở thêm lệnh DCA, chỉ chờ hồi phục.</td></tr>
-          <tr><td class="param-name">Buffer để xuống tầng ($)</td><td class="param-default">100</td><td class="param-desc"><strong>Level_ExitBuffer</strong> — Chỉ xuống tầng thấp hơn khi lỗ giảm thêm 100$ so với ngưỡng kích hoạt, tránh dao động.</td></tr>
+
         </tbody></table>
       </div>
       <div class="tab-pane" id="tab-tp">
         <table class="params-table"><thead><tr><th>THÔNG SỐ</th><th>GIÁ TRỊ</th><th>MÔ TẢ</th></tr></thead>
         <tbody>
-          <tr><td class="param-name">TP Tổng ($/0.01 lot diff)</td><td class="param-default">1.0</td><td class="param-desc"><strong>TP_All_rateLot</strong> — Target = (tổng lot Buy + Sell) × hệ số × 100. Ví dụ tổng 2 lot, hệ số 1 → cần 200$ để chốt cả 2 chiều.</td></tr>
-          <tr><td class="param-name">TP Đơn ($/0.01 lot)</td><td class="param-default">9.0</td><td class="param-desc"><strong>tpOnly</strong> — Target = totalLot × 100 × 9. Ví dụ 0.1 lot Buy cần 90$ lãi Buy để chốt riêng chiều đó.</td></tr>
-          <tr><td class="param-name">Số lệnh kích hoạt TP3</td><td class="param-default">12</td><td class="param-desc">Khi số lệnh một chiều ≥ 12, EA gom 3 lệnh sâu nhất, tính breakeven + Step, chốt nhóm khi giá đạt mức đó.</td></tr>
-          <tr><td class="param-name">Tổng lỗ kích hoạt tỉa ($)</td><td class="param-default">-30</td><td class="param-desc"><strong>loss_trims</strong> — Khi floating loss vượt -30$, EA dùng lãi tích lũy từ chu kỳ trước để đóng lệnh lỗ nặng.</td></tr>
-          <tr><td class="param-name">% lãi giữ lại khi tỉa</td><td class="param-default">16%</td><td class="param-desc"><strong>KeepProfit_Trims</strong> — Khi tỉa, EA trích 16% lãi tích lũy vào "túi", 84% còn lại bù lỗ, giúp tích lũy lãi thực dần dần.</td></tr>
-          <tr><td class="param-name">Giữ/RESET lãi tích lũy</td><td class="param-default">true (GIỮ)</td><td class="param-desc"><strong>reset_closeProfit</strong>: true → lãi từ các chu kỳ cũ được giữ lại để tỉa lệnh mới (dài hạn). false → reset sau mỗi chu kỳ.</td></tr>
+          <tr><td class="param-name">TP Tổng ($/0.01 lot diff)</td><td class="param-default">1.0$</td><td class="param-desc"><strong></strong>Target = (tổng chênh lệch giữa lot Buy và lot Sell) × hệ số. Ví dụ tổng lot Buy = 2 lot, Tổng lot Sell = 0.5lot → Lot chênh lệch = 2-0.5 = 1.5 lot, hệ số Target là 1$/0.01lot => Tổng target cho 1.5 lot là 150$.</td></tr>
+          <tr><td class="param-name">TP Đơn ($/0.01 lot)</td><td class="param-default">9.0$</td><td class="param-desc"><strong></strong>Target = Tổng Lot × 100 × 9$. Ví dụ 0.1 lot Buy cần 90$ lãi Buy để chốt riêng chiều đó.</td></tr>
+          <tr><td class="param-name">Số lệnh kích hoạt TP3</td><td class="param-default">12</td><td class="param-desc">Khi số lệnh một chiều ≥ 12, EA gom 3 lệnh sâu nhất, tính breakeven + TP Pip, chốt lãi riêng nhóm khi giá đạt mức đó.</td></tr>
+          <tr><td class="param-name">Tổng lỗ kích hoạt tỉa ($)</td><td class="param-default">-30$</td><td class="param-desc"><strong></strong> Khi floating âm vượt -30$, EA dùng lãi tích lũy từ chu kỳ trước để đóng lệnh lỗ nặng giúp thu gọn bộ lệnh.</td></tr>
+
         </tbody></table>
       </div>
       <div class="tab-pane" id="tab-timer">
