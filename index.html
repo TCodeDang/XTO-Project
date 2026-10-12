@@ -1,530 +1,451 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XTO Speeder EA MT5 — by TCODE</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg0: #0a0d14;
-  --bg1: #0f131c;
-  --bg2: #161c28;
-  --bg3: #1e2636;
-  --bg4: #2a3448;
-  --yel: #f5b041;
-  --yel2: #ffc85a;
-  --yel3: #ffde9e;
-  --grn: #2ecc71;
-  --grn2: #27ae60;
-  --red: #e74c3c;
-  --red2: #c0392b;
-  --t1: #f0f3f8;
-  --t2: #bdc3d0;
-  --t3: #7f8c9a;
-  --t4: #4a5568;
-  --border: #1e2a3a;
-  --card-bd: rgba(245,176,65,0.12);
-  --glow-yel: rgba(245,176,65,0.2);
-}
+<!-- ============================================================
+     POPUP THÔNG BÁO NÂNG CẤP XTO SPEEDER → CITYBOT  (v3 — chỉ cho phép chuyển trang)
+     Vũ trụ + quả cầu vàng + song ngữ VI/EN (mặc định EN)
+     Mới: nhãn MIỄN PHÍ, khung ưu đãi, không có nút đóng,
+          sửa quỹ đạo 3D, hiển thị tốt trên mobile
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg0);
-  color:var(--t1);
-  overflow-x:hidden;
-  line-height:1.5;
-}
+<div id="cb-migrate" class="cb-overlay" role="dialog" aria-modal="true" aria-labelledby="cb-title">
+  <div class="cb-bg">
+    <div class="cb-nebula n1"></div>
+    <div class="cb-nebula n2"></div>
+    <div class="cb-nebula n3"></div>
+    <canvas id="cb-stars"></canvas>
+  </div>
 
-/* grid nền nhẹ */
-body::after{
-  content:'';
-  position:fixed;
-  inset:0;
-  background-image:linear-gradient(rgba(245,176,65,0.02) 1px, transparent 1px),
-                   linear-gradient(90deg, rgba(245,176,65,0.02) 1px, transparent 1px);
-  background-size:48px 48px;
-  pointer-events:none;
-  z-index:0;
-}
-
-/* navbar */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 40px;height:68px;
-  background:rgba(10,13,20,0.92);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(245,176,65,0.15);
-}
-.nav-logo{display:flex;align-items:center;gap:10px;}
-.nav-logo .t{
-  font-family:'JetBrains Mono',monospace;
-  font-size:28px;font-weight:700;
-  color:var(--yel);
-}
-.nav-logo .code{font-size:13px;color:var(--t3);letter-spacing:3px;font-weight:500;}
-.nav-badge{
-  font-family:'JetBrains Mono',monospace;
-  font-size:11px;padding:5px 14px;
-  border:1px solid rgba(46,204,113,0.4);
-  color:var(--grn);border-radius:40px;
-  background:rgba(46,204,113,0.08);
-}
-.nav-links{display:flex;gap:36px;}
-.nav-links a{
-  color:var(--t2);font-size:14px;font-weight:500;
-  text-decoration:none;transition:color .2s;
-}
-.nav-links a:hover{color:var(--yel);}
-
-/* hero */
-.hero{
-  position:relative;
-  min-height:90vh;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  text-align:center;
-  padding:120px 40px 80px;
-  z-index:1;
-}
-.hero-glow{
-  position:absolute;
-  width:600px;height:600px;
-  background:radial-gradient(ellipse, rgba(245,176,65,0.08) 0%, transparent 70%);
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  pointer-events:none;
-}
-.hero-tag{
-  font-family:'JetBrains Mono',monospace;
-  font-size:12px;letter-spacing:3px;
-  color:var(--grn);
-  background:rgba(46,204,113,0.08);
-  border:1px solid rgba(46,204,113,0.25);
-  padding:6px 20px;border-radius:40px;
-  margin-bottom:32px;
-  display:inline-block;
-}
-.hero-title{
-  font-size:clamp(48px,7vw,88px);
-  font-weight:800;
-  line-height:1.1;
-  letter-spacing:-2px;
-}
-.hero-title .xto{color:var(--yel);text-shadow:0 0 25px var(--glow-yel);}
-.hero-title .speeder{color:var(--t1);}
-.hero-sub{
-  font-size:clamp(15px,2vw,19px);
-  color:var(--t2);
-  margin:24px 0 12px;
-  font-weight:400;
-}
-.hero-desc{
-  font-family:'JetBrains Mono',monospace;
-  font-size:13px;color:var(--t4);
-  margin-bottom:48px;
-}
-.hero-cta{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:14px 32px;
-  background:var(--yel);
-  color:#0a0c10;font-weight:700;font-size:14px;
-  border:none;border-radius:40px;cursor:pointer;
-  text-decoration:none;
-  transition:all .2s;
-  box-shadow:0 4px 20px rgba(245,176,65,0.3);
-}
-.btn-primary:hover{background:var(--yel2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,176,65,0.4);}
-.btn-secondary{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:14px 32px;
-  background:transparent;
-  color:var(--t1);font-weight:500;font-size:14px;
-  border:1px solid var(--bg3);border-radius:40px;cursor:pointer;
-  text-decoration:none;
-  transition:all .2s;
-}
-.btn-secondary:hover{border-color:var(--yel);color:var(--yel);}
-
-/* section */
-.container{max-width:1200px;margin:0 auto;padding:0 40px;}
-.section-label{
-  font-family:'JetBrains Mono',monospace;
-  font-size:11px;letter-spacing:4px;color:var(--yel);
-  margin-bottom:20px;
-  display:flex;align-items:center;gap:12px;
-}
-.section-label::before{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(245,176,65,0.4));}
-.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(245,176,65,0.4),transparent);}
-h2.sec-title{
-  font-size:clamp(32px,5vw,48px);font-weight:800;
-  letter-spacing:-1px;text-align:center;margin-bottom:14px;
-}
-.sec-sub{text-align:center;color:var(--t3);margin-bottom:64px;font-size:15px;}
-
-/* flow cards */
-#how{padding:100px 0;}
-.flow-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:1px;
-  background:var(--bg3);
-  border:1px solid var(--bg3);
-  border-radius:20px;
-  overflow:hidden;
-}
-.flow-card{
-  background:var(--bg1);
-  padding:32px 26px;
-  transition:background .2s;
-}
-.flow-card:hover{background:var(--bg2);}
-.flow-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--yel);letter-spacing:2px;margin-bottom:18px;}
-.flow-icon{font-size:32px;margin-bottom:16px;display:block;}
-.flow-title{font-size:18px;font-weight:700;margin-bottom:12px;}
-.flow-body{font-size:14px;color:var(--t2);line-height:1.65;}
-
-/* strategy blocks */
-#strategy{padding:100px 0;background:var(--bg1);}
-.strat-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
-@media(max-width:768px){.strat-grid{grid-template-columns:1fr;}}
-.strat-block{
-  background:var(--bg2);
-  border:1px solid var(--card-bd);
-  border-radius:20px;padding:32px;
-}
-.strat-label{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;letter-spacing:2px;
-  padding:4px 12px;border-radius:40px;
-  display:inline-block;margin-bottom:20px;
-}
-.lbl-grn{background:rgba(46,204,113,0.1);color:var(--grn);}
-.lbl-yel{background:rgba(245,176,65,0.1);color:var(--yel);}
-.lbl-red{background:rgba(231,76,60,0.1);color:var(--red);}
-.strat-title{font-size:20px;font-weight:700;margin-bottom:14px;}
-.strat-body{font-size:14px;color:var(--t2);line-height:1.75;}
-.strat-body code{
-  font-family:'JetBrains Mono',monospace;font-size:12px;
-  background:var(--bg3);padding:2px 8px;border-radius:6px;color:var(--yel);
-}
-
-/* params table */
-#params{padding:100px 0;}
-.params-tabs{display:flex;gap:4px;margin-bottom:2px;flex-wrap:wrap;}
-.tab-btn{
-  font-family:'JetBrains Mono',monospace;font-size:12px;
-  padding:10px 26px;background:var(--bg2);color:var(--t3);
-  border:none;cursor:pointer;border-radius:12px 12px 0 0;
-  transition:all .2s;
-}
-.tab-btn.active{background:var(--bg3);color:var(--yel);}
-.tab-pane{display:none;}
-.tab-pane.active{display:block;}
-.params-table{width:100%;border-collapse:collapse;border-radius:0 16px 16px 16px;overflow:hidden;}
-.params-table thead tr{background:var(--bg3);}
-.params-table th{
-  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;
-  color:var(--t2);padding:14px 20px;text-align:left;
-}
-.params-table tbody tr{background:var(--bg2);border-bottom:1px solid rgba(255,255,255,0.04);}
-.params-table tbody tr:hover{background:var(--bg3);}
-.params-table td{padding:14px 20px;font-size:13px;vertical-align:top;}
-.param-name{
-  font-family:'JetBrains Mono',monospace;
-  color:var(--yel);font-size:12px;
-}
-.param-default{
-  font-family:'JetBrains Mono',monospace;
-  color:var(--grn);font-size:12px;
-}
-.param-desc{color:var(--t2);line-height:1.6;}
-.param-desc .note{font-size:12px;color:var(--t4);margin-top:6px;}
-.badge-warn{
-  display:inline-block;font-size:10px;
-  background:rgba(245,176,65,0.12);color:var(--yel);
-  padding:2px 8px;border-radius:20px;margin-left:8px;
-  font-family:'JetBrains Mono',monospace;
-}
-.badge-imp{
-  display:inline-block;font-size:10px;
-  background:rgba(231,76,60,0.12);color:var(--red);
-  padding:2px 8px;border-radius:20px;margin-left:8px;
-}
-
-/* levels */
-#levels{padding:100px 0;background:var(--bg1);}
-.levels-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:24px;}
-.level-card{
-  border-radius:20px;overflow:hidden;
-  border:1px solid var(--card-bd);
-  transition:transform .2s;
-}
-.level-card:hover{transform:translateY(-4px);}
-.level-hdr{padding:22px 24px;display:flex;justify-content:space-between;align-items:center;}
-.lv1-hdr{background:linear-gradient(135deg,#0f131c,#1a2a1a);}
-.lv2-hdr{background:linear-gradient(135deg,#0f131c,#2a2216);}
-.lv3-hdr{background:linear-gradient(135deg,#0f131c,#2a1816);}
-.level-name{font-size:20px;font-weight:800;}
-.level-trigger{font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 12px;border-radius:40px;}
-.t-green{background:rgba(46,204,113,0.12);color:var(--grn);}
-.t-orange{background:rgba(245,176,65,0.12);color:var(--yel);}
-.t-red{background:rgba(231,76,60,0.12);color:var(--red);}
-.level-body{background:var(--bg2);padding:20px 24px;}
-.lv-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
-.lv-row:last-child{border:none;}
-.lv-key{font-size:13px;color:var(--t3);}
-.lv-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;}
-.v-grn{color:var(--grn);}
-.v-yel{color:var(--yel);}
-.v-red{color:var(--red);}
-
-/* trim cards */
-#trim{padding:100px 0;}
-.trim-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
-.trim-card{
-  background:var(--bg2);border:1px solid var(--card-bd);
-  border-radius:20px;padding:28px;
-}
-.trim-icon{font-size:34px;margin-bottom:16px;}
-.trim-title{font-size:18px;font-weight:700;margin-bottom:10px;}
-.trim-desc{font-size:13px;color:var(--t2);line-height:1.65;}
-.trim-formula{
-  font-family:'JetBrains Mono',monospace;font-size:12px;
-  background:var(--bg3);border-left:3px solid var(--yel);
-  padding:12px 16px;margin-top:18px;border-radius:0 8px 8px 0;
-  color:var(--t2);
-}
-
-/* warn */
-#warn{padding:80px 0;}
-.warn-box{
-  background:linear-gradient(135deg,rgba(231,76,60,0.05),transparent);
-  border:1px solid rgba(231,76,60,0.2);
-  border-radius:24px;padding:44px;
-  display:flex;gap:32px;align-items:flex-start;
-}
-.warn-icon{font-size:52px;flex-shrink:0;}
-.warn-title{font-size:26px;font-weight:800;color:var(--red);margin-bottom:20px;}
-.warn-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
-.warn-list li{display:flex;gap:12px;font-size:14px;color:var(--t2);line-height:1.6;}
-.warn-list li::before{content:'⚠';font-size:15px;}
-
-/* contact */
-#contact{padding:100px 0;text-align:center;}
-.contact-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:48px;}
-.contact-card{
-  background:var(--bg2);border:1px solid var(--card-bd);
-  border-radius:20px;padding:28px 36px;
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-  text-decoration:none;color:inherit;
-  transition:all .2s;min-width:180px;
-}
-.contact-card:hover{border-color:var(--yel);background:var(--bg3);transform:translateY(-3px);}
-.contact-card .icon{font-size:32px;}
-.contact-card .label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--t4);}
-.contact-card .value{font-size:15px;font-weight:600;}
-
-footer{
-  background:var(--bg1);
-  border-top:1px solid rgba(255,255,255,0.04);
-  padding:40px;text-align:center;
-  font-size:12px;color:var(--t4);
-  font-family:'JetBrains Mono',monospace;
-}
-footer span{color:var(--yel);}
-
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
-.reveal.in{opacity:1;transform:none;}
-::-webkit-scrollbar{width:5px;}
-::-webkit-scrollbar-track{background:var(--bg0);}
-::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:4px;}
-@media(max-width:768px){
-  nav{padding:0 20px;}
-  .nav-links{display:none;}
-  .container{padding:0 20px;}
-  .hero{padding:100px 20px 60px;}
-  .warn-box{flex-direction:column;}
-}
-</style>
-</head>
-<body>
-
-<nav>
-  <div class="nav-logo">
-    <div style="display: flex; align-items: baseline; gap: 2px;">
-      <span class="t" style="font-size: 40px; font-weight: 900; line-height: 1;">T</span>
-      <span style="font-size: 40px; font-weight: 500; color: var(--t1); letter-spacing: 1px;">CODE™</span>
+  <div class="cb-box">
+    <!-- Thanh trên: ngôn ngữ + đóng -->
+    <div class="cb-top">
+      <div class="cb-lang" role="group" aria-label="Language">
+        <button type="button" data-lang="vi" onclick="cbSetLang('vi')">VI</button>
+        <button type="button" data-lang="en" class="active" onclick="cbSetLang('en')">EN</button>
+      </div>
     </div>
-    <div class="code" style="font-size: 11px; color: var(--t3); letter-spacing: 2px; margin-top: 2px;"></div>
-  </div>
-  <div class="nav-links">
-    <a href="#how">Cơ chế</a>
-    <a href="#strategy">Chiến lược</a>
-    <a href="#params">Thông số</a>
-    <a href="#levels">Level</a>
-    <a href="#contact">Liên hệ</a>
-  </div>
-  <div class="nav-badge">MT5 EA v1.4</div>
-</nav>
 
-<div class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-tag">⚡ BOT GIAO DỊCH TỰ ĐỘNG MT5</div>
-  <h1 class="hero-title"><span class="xto">XTO Speeder</span><br><span class="speeder"></span></h1>
-  <p class="hero-sub">Smart DCA · Pyramid · Multi-Level Risk · ATR Signal</p>
-  <p class="hero-desc">© XTO by TCODE — Expert Advisor MetaTrader 5</p>
-  <div class="hero-cta">
-    <a href="#contact" class="btn-primary">📞 LIÊN HỆ</a>
-    <a href="#params" class="btn-secondary">📋 THÔNG SỐ CÀI ĐẶT</a>
+    <!-- Quả cầu + vệ tinh -->
+    <div class="cb-stage">
+      <div class="cb-ring r1"></div>
+      <div class="cb-ring r2"></div>
+      <div class="cb-ring r3"></div>
+
+      <div class="cb-planet">
+        <div class="cb-planet-inner">
+          <div class="cb-planet-main">CityBot</div>
+          <div class="cb-planet-sub">MT5 · EA</div>
+        </div>
+        <span class="cb-free-badge" data-i18n="badge">FREE</span>
+      </div>
+
+      <div class="cb-orbit-system">
+        <div class="cb-sat" style="--angle:0deg"><div class="cb-chip"><span class="cb-ico">🚀</span><span class="cb-name">XTO Speeder</span></div></div>
+        <div class="cb-sat" style="--angle:60deg"><div class="cb-chip"><span class="cb-ico">🛡️</span><span class="cb-name">Hedging-Pro</span></div></div>
+        <div class="cb-sat" style="--angle:120deg"><div class="cb-chip"><span class="cb-ico">⚡</span><span class="cb-name">B9-Scalper</span></div></div>
+        <div class="cb-sat" style="--angle:180deg"><div class="cb-chip"><span class="cb-ico">🌟</span><span class="cb-name">Season-X</span></div></div>
+        <div class="cb-sat" style="--angle:240deg"><div class="cb-chip"><span class="cb-ico">💰</span><span class="cb-name">Money-TICK</span></div></div>
+        <div class="cb-sat" style="--angle:300deg"><div class="cb-chip"><span class="cb-ico">🧠</span><span class="cb-name">CENTURY-AI</span></div></div>
+      </div>
+    </div>
+
+    <h3 class="cb-title" id="cb-title" data-i18n="title">XTO Speeder has been upgraded!</h3>
+    <p class="cb-desc" data-i18n="desc">
+      XTO Speeder is now integrated as <strong>a Bot Trade Module</strong> inside the super EA <strong>CityBot</strong> — together with 15+ modules and new tools.
+    </p>
+
+    <ul class="cb-feats">
+      <li><i>🤖</i><span data-i18n="f1">Multi-strategy Bot Trade</span></li>
+      <li><i>🛠️</i><span data-i18n="f2">Semi-auto tools &amp; order management</span></li>
+      <li><i>📡</i><span data-i18n="f3">Market insight &amp; trade statistics</span></li>
+      <li><i>🎁</i><span data-i18n="f4">Free to use</span></li>
+    </ul>
+
+    <!-- Ghi chú MIỄN PHÍ (tăng chuyển đổi) -->
+    <div class="cb-free">
+      <div class="cb-free-ico">🎁</div>
+      <div class="cb-free-txt">
+        <strong data-i18n="freeTitle">EA CityBot — Free to use</strong>
+      </div>
+    </div>
+
+    <a href="https://citybot.vn" class="cb-btn" id="cb-cta">
+      <span data-i18n="btn">Get CityBot for free</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
   </div>
 </div>
 
-<!-- HOW IT WORKS -->
-<section id="how">
-  <div class="container">
-    <div class="section-label">CƠ CHẾ HOẠT ĐỘNG</div>
-    <h2 class="sec-title reveal">XTO Speeder hoạt động như thế nào?</h2>
-    <p class="sec-sub reveal">XTO Speeder kết hợp tín hiệu ATR + DCA + Pyramid trong một hệ thống đa tầng thông minh</p>
-    <div class="flow-grid reveal">
-      <div class="flow-card"><span class="flow-num">01 — TÍN HIỆU</span><span class="flow-icon">📡</span><div class="flow-title">ATR Trailing Signal</div><div class="flow-body">EA sử dụng ATR kết hợp với bộ làm mịn để xác định xu hướng chính trên khung M1, phát tín hiệu BUY/SELL khi giá vượt vùng trailing stop động.</div></div>
-      <div class="flow-card"><span class="flow-num">02 — VÀO LỆNH</span><span class="flow-icon">🎯</span><div class="flow-title">DCA + Pyramid</div><div class="flow-body">EA vào lệnh DCA ngược chiều khi giá chạy ngược (hạ giá trung bình) và Pyramid xuôi chiều khi giá tiếp tục đúng hướng, mỗi lệnh cách nhau <code>Step</code> pips.</div></div>
-      <div class="flow-card"><span class="flow-num">03 — QUẢN LÝ RỦI RO</span><span class="flow-icon">🛡️</span><div class="flow-title">Multi-Level System</div><div class="flow-body">Hệ thống tự động chuyển tầng (Level 1→3) khi tổng lỗ vượt ngưỡng. Mỗi tầng có Step khác nhau, phương pháp tăng lot khác nhau.</div></div>
-      <div class="flow-card"><span class="flow-num">04 — CHỐT LỢI NHUẬN</span><span class="flow-icon">💰</span><div class="flow-title">Smart TP & Trim</div><div class="flow-body">Ba phương thức chốt: TP Tổng (cả BUY+SELL), TP Đơn (một chiều), và cơ chế tỉa lệnh thông minh dùng lãi bù lỗ, giảm drawdown.</div></div>
-    </div>
-  </div>
-</section>
+<style>
+  /* ===== OVERLAY ===== */
+  #cb-migrate.cb-overlay{
+    position:fixed;inset:0;z-index:9999;
+    display:none;align-items:center;justify-content:center;
+    padding:16px;
+    font-family:'Inter',-apple-system,'Segoe UI',sans-serif;
+    background:rgba(4,6,11,.86);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
+  #cb-migrate.cb-overlay.show{display:flex;animation:cbFade .35s ease}
+  @keyframes cbFade{from{opacity:0}to{opacity:1}}
 
-<!-- STRATEGY -->
-<section id="strategy">
-  <div class="container">
-    <div class="section-label">CHIẾN LƯỢC GIAO DỊCH</div>
-    <h2 class="sec-title reveal">Kiến trúc chiến lược</h2>
-    <p class="sec-sub reveal">Phân tích chi tiết từng thành phần cốt lõi của XTO Speeder</p>
-    <div class="strat-grid">
-      <div class="strat-block"><span class="strat-label lbl-grn">ATR SIGNAL ENGINE</span><div class="strat-title">Hệ thống tín hiệu ATR Trailing</div><div class="strat-body">EA tính toán vùng trailing stop dựa trên biến động thị trường tức thời. Giúp phản ứng nhanh với biến động ngắn hạn.</div></div>
-      <div class="strat-block"><span class="strat-label lbl-yel">DCA SYSTEM</span><div class="strat-title">Dollar Cost Averaging thông minh</div><div class="strat-body">Khi giá ngược chiều, EA không cắt lỗ mà thêm lệnh theo nguyên tắc DCA: mỗi lệnh cách nhau <code>Step</code> pips, lot tăng dần (cộng hoặc nhân) để hạ giá trung bình. Khi thị trường hồi phục, chỉ cần về breakeven là có thể chốt lời.</div></div>
-      <div class="strat-block"><span class="strat-label lbl-grn">PYRAMID SYSTEM</span><div class="strat-title">Tăng vị thế theo xu hướng</div><div class="strat-body">Song song DCA, EA thêm lệnh xuôi chiều khi giá tiếp tục đúng hướng (Pyramid). Lệnh Pyramid dùng lotStart cố định và mở khi giá vượt lệnh cực trị hiện tại thêm <code>Step</code> pips, thu thêm lợi nhuận khi thị trường trending.</div></div>
-      <div class="strat-block"><span class="strat-label lbl-red">LOT MANAGEMENT</span><div class="strat-title">2 Phương pháp tính Lot</div><div class="strat-body"><strong>Lot Cộng (lotplus)</strong>: mỗi lệnh = lệnh trước + Lot cộng.<br><strong>Lot Nhân (xlot)</strong>: mỗi lệnh = lệnh trước × Hệ số nhân.<br>Chế độ <strong>Bù Lot (bu_lot)</strong>: tính lot dựa trên khoảng cách từ giá hiện tại đến lệnh đầu tiên, nạp đúng lot cần để bù lỗ tức thì.</div></div>
-    </div>
-  </div>
-</section>
+  /* ===== NỀN VŨ TRỤ ===== */
+  #cb-migrate .cb-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+  #cb-migrate .cb-nebula{position:absolute;border-radius:50%;filter:blur(90px);opacity:.4;will-change:transform}
+  #cb-migrate .cb-nebula.n1{width:520px;height:520px;top:-15%;left:-10%;background:radial-gradient(circle,rgba(217,169,62,.55),transparent 65%);animation:cbNeb1 30s ease-in-out infinite}
+  #cb-migrate .cb-nebula.n2{width:640px;height:640px;bottom:-20%;right:-15%;background:radial-gradient(circle,rgba(74,125,255,.4),transparent 65%);animation:cbNeb2 42s ease-in-out infinite}
+  #cb-migrate .cb-nebula.n3{width:480px;height:480px;top:30%;left:40%;background:radial-gradient(circle,rgba(87,217,232,.28),transparent 65%);animation:cbNeb3 36s ease-in-out infinite}
+  @keyframes cbNeb1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,50px) scale(1.12)}}
+  @keyframes cbNeb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-80px,40px) scale(1.1)}}
+  @keyframes cbNeb3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-50px,-60px) scale(.92)}}
+  #cb-stars{position:absolute;inset:0;width:100%;height:100%}
 
-<!-- PARAMS TABLE (đã lọc bỏ ATR_Length, Smooth, KeepProfit_Trims, reset_closeProfit, TargetTia) -->
-<section id="params">
-  <div class="container">
-    <div class="section-label">THÔNG SỐ CÀI ĐẶT</div>
-    <h2 class="sec-title reveal">Giải thích chi tiết thông số</h2>
-    <p class="sec-sub reveal">Hiểu rõ mỗi tham số để tối ưu EA theo chiến lược của bạn</p>
-    <div class="reveal">
-      <div class="params-tabs">
-        <button class="tab-btn active" onclick="switchTab('general')">⚙️ Chung</button>
-        <button class="tab-btn" onclick="switchTab('levels')">📊 Tầng lệnh</button>
-        <button class="tab-btn" onclick="switchTab('tp')">💰 Chốt lệnh</button>
-        <button class="tab-btn" onclick="switchTab('timer')">⏰ Khung giờ</button>
-      </div>
-      <div class="tab-pane active" id="tab-general">
-        <table class="params-table"><thead><tr><th>THÔNG SỐ</th><th>GIÁ TRỊ</th><th>MÔ TẢ</th></tr></thead>
-        <tbody>
-          <tr><td class="param-name">Magic Number</td><td class="param-default">1111</td><td class="param-desc"><strong></strong>Số định danh duy nhất của EA. Mỗi EA trên cùng tài khoản phải có Magic khác nhau để tránh xung đột lệnh.</td></tr>
-          <tr><td class="param-name">Khung thời gian tín hiệu</td><td class="param-default">M1</td><td class="param-desc"><strong></strong>Khung nến để tính toán tín hiệu ATR. M1 phản ứng nhanh, phù hợp scalping. <span class="badge-warn">QUAN TRỌNG</span></td></tr>
-          <tr><td class="param-name">Lot Start</td><td class="param-default">0.01</td><td class="param-desc"><strong></strong>Lot của lệnh đầu tiên mỗi chu kỳ. Với tài khoản $1,000: khuyến nghị 0.01.<span class="badge-imp"></span></td></tr>
-          <tr><td class="param-name">Lot Max / Lệnh</td><td class="param-default">3.0</td><td class="param-desc"><strong></strong>Giới hạn lot tối đa của mỗi lệnh đơn lẻ, bảo vệ tài khoản khỏi lệnh quá lớn đột biến.</td></tr>
-          <tr><td class="param-name">Lot Max / Chiều</td><td class="param-default">100</td><td class="param-desc"><strong></strong>Khi tổng lot BUY hoặc SELL đạt ngưỡng này, EA ngừng mở thêm lệnh chiều đó.</td></tr>
-          <tr><td class="param-name">Cắt lỗ toàn bộ ($)</td><td class="param-default">-100,000</td><td class="param-desc"><strong></strong>Khi tổng lỗ floating đạt ngưỡng này (số âm), EA tự động đóng tất cả lệnh.</td></tr>
-        </tbody></table>
-      </div>
-      <div class="tab-pane" id="tab-levels">
-        <table class="params-table"><thead><tr><th>THÔNG SỐ</th><th>TẦNG 1 / 2 / 3</th><th>GIẢI THÍCH</th></tr></thead>
-        <tbody>
-          <tr><td class="param-name">Ngưỡng lỗ kích hoạt tầng</td><td class="param-default">- / -$2,000 / -$9,000</td><td class="param-desc"><strong>Loss_L2 / L3</strong> — Khi floating âm vượt ngưỡng, EA chuyển tầng tương ứng với chiến lược phục hồi mạnh hơn.</td></tr>
-          <tr><td class="param-name">Step (pips) mỗi tầng</td><td class="param-default">120 / 210 / 180</td><td class="param-desc"><strong>Khoảng cách DCA</strong> — Lệnh DCA tiếp theo được mở khi giá cách lệnh hiện tại đúng Step pips.</td></tr>
-          <tr><td class="param-name">Phương pháp tăng Lot</td><td class="param-default">lotplus / xlot / lotplus</td><td class="param-desc">lotplus (cộng đều) hoặc xlot (nhân cấp số nhân). L2 dùng xlot 1.6 để phục hồi nhanh.</td></tr>
-          <tr><td class="param-name">Chế độ lot</td><td class="param-default">nomal / bu_lot / nomal</td><td class="param-desc"><strong>nomal_lot</strong>: lũy tiến theo thứ tự lệnh. <strong>bu_lot</strong>: bù lot dựa trên khoảng cách giá.</td></tr>
-          <tr><td class="param-name">Lot cộng / Hệ số nhân</td><td class="param-default">0.01 / 0.01 / 0.01 & 1.05 / 1.6 / 1.5</td><td class="param-desc">lot_plus (cộng) hoặc LotMulti (nhân). L2 dùng 1.6 — tăng nhanh để thoát lỗ sâu.<span class="badge-imp">RỦI RO CAO</span></td></tr>
-          <tr><td class="param-name">Tạm dừng vào lệnh</td><td class="param-default">false / false / false</td><td class="param-desc">Khi true, EA vào tầng nhưng không mở thêm lệnh DCA, chỉ chờ hồi phục.</td></tr>
+  /* ===== HỘP CHÍNH ===== */
+  #cb-migrate .cb-box{
+    position:relative;z-index:2;
+    width:100%;max-width:540px;
+    max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);
+    overflow-y:auto;
+    background:
+      radial-gradient(120% 60% at 50% 0%,rgba(217,169,62,.10),transparent 60%),
+      linear-gradient(180deg,#0e1424 0%,#070a13 100%);
+    border:1px solid transparent;
+    border-radius:22px;
+    padding:18px 28px 22px;
+    text-align:center;
+    box-shadow:0 40px 90px -30px rgba(0,0,0,.95),0 0 90px -30px rgba(217,169,62,.4),inset 0 1px 0 rgba(255,255,255,.06);
+    animation:cbPop .5s cubic-bezier(.16,1,.3,1);
+  }
+  /* viền gradient vàng */
+  #cb-migrate .cb-box::before{
+    content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+    background:linear-gradient(160deg,rgba(255,229,102,.65),rgba(217,169,62,.12) 40%,rgba(87,217,232,.25) 100%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    pointer-events:none;
+  }
+  #cb-migrate .cb-box::-webkit-scrollbar{width:5px}
+  #cb-migrate .cb-box::-webkit-scrollbar-thumb{background:rgba(217,169,62,.35);border-radius:4px}
+  @keyframes cbPop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
 
-        </tbody></table>
-      </div>
-      <div class="tab-pane" id="tab-tp">
-        <table class="params-table"><thead><tr><th>THÔNG SỐ</th><th>GIÁ TRỊ</th><th>MÔ TẢ</th></tr></thead>
-        <tbody>
-          <tr><td class="param-name">TP Tổng ($/0.01 lot diff)</td><td class="param-default">1.0$</td><td class="param-desc"><strong></strong>Target = (tổng chênh lệch giữa lot Buy và lot Sell) × hệ số. Ví dụ tổng lot Buy = 2 lot, Tổng lot Sell = 0.5lot → Lot chênh lệch = 2-0.5 = 1.5 lot, hệ số Target là 1$/0.01lot => Tổng target cho 1.5 lot là 150$.</td></tr>
-          <tr><td class="param-name">TP Đơn ($/0.01 lot)</td><td class="param-default">9.0$</td><td class="param-desc"><strong></strong>Target = Tổng Lot × 100 × 9$. Ví dụ 0.1 lot Buy cần 90$ lãi Buy để chốt riêng chiều đó.</td></tr>
-          <tr><td class="param-name">Số lệnh kích hoạt TP3</td><td class="param-default">12</td><td class="param-desc">Khi số lệnh một chiều ≥ 12, EA gom 3 lệnh sâu nhất, tính breakeven + TP Pip, chốt lãi riêng nhóm khi giá đạt mức đó.</td></tr>
-          <tr><td class="param-name">Tổng lỗ kích hoạt tỉa ($)</td><td class="param-default">-30$</td><td class="param-desc"><strong></strong> Khi floating âm vượt -30$, EA dùng lãi tích lũy từ chu kỳ trước để đóng lệnh lỗ nặng giúp thu gọn bộ lệnh.</td></tr>
+  /* ===== THANH TRÊN ===== */
+  #cb-migrate .cb-top{display:flex;align-items:center;justify-content:flex-end;position:relative;z-index:6}
+  #cb-migrate .cb-lang{
+    display:flex;gap:2px;padding:3px;
+    background:rgba(217,169,62,.06);
+    border:1px solid rgba(217,169,62,.22);
+    border-radius:100px;
+  }
+  #cb-migrate .cb-lang button{
+    background:none;border:none;cursor:pointer;
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;
+    color:#8c98b4;padding:6px 12px;border-radius:100px;transition:all .2s;line-height:1;
+  }
+  #cb-migrate .cb-lang button:hover{color:#E8C766}
+  #cb-migrate .cb-lang button.active{
+    background:linear-gradient(135deg,#FFE566 0%,#F0C04A 35%,#C9972A 70%,#8B6914 100%);
+    color:#181206;box-shadow:0 0 10px rgba(217,169,62,.35);
+  }
 
-        </tbody></table>
-      </div>
-      <div class="tab-pane" id="tab-timer">
-        <table class="params-table"><thead><tr><th>THÔNG SỐ</th><th>GIÁ TRỊ</th><th>MÔ TẢ</th></tr></thead>
-        <tbody><tr><td class="param-name">Bật lọc giờ giao dịch</td><td class="param-default">false</td><td class="param-desc">false: EA chạy 24/7. true: chỉ vào lệnh mới trong khung giờ cài đặt (GMT+7).</td></tr>
-        <tr><td class="param-name">Giờ bắt đầu 1</td><td class="param-default">07:00</td><td class="param-desc">Phiên sáng GMT+7, phù hợp biến động vàng đầu phiên Âu.</td></tr>
-        <tr><td class="param-name">Giờ kết thúc 1</td><td class="param-default">13:30</td><td class="param-desc">Kết thúc trước phiên Mỹ mở cửa.</td></tr>
-        <tr><td class="param-name">Giờ bắt đầu 2</td><td class="param-default">14:30</td><td class="param-desc">Phiên chiều, sau khi thị trường ổn định.</td></tr>
-        <tr><td class="param-name">Giờ kết thúc 2</td><td class="param-default">23:00</td><td class="param-desc">Kết thúc trước nửa đêm GMT+7, tránh thanh khoản thấp.</td></tr>
-        </tbody></table>
-      </div>
-    </div>
-  </div>
-</section>
+  /* ===== SÂN KHẤU QUẢ CẦU ===== */
+  #cb-migrate .cb-stage{
+    position:relative;height:230px;margin:0 0 14px;
+    display:flex;align-items:center;justify-content:center;
+    perspective:900px;transform-style:preserve-3d;
+    --r:128px;
+  }
+  #cb-migrate .cb-ring{
+    position:absolute;top:50%;left:50%;border-radius:50%;
+    border:1px dashed rgba(217,169,62,.22);
+    transform:translate(-50%,-50%) rotateX(72deg);
+    pointer-events:none;
+  }
+  #cb-migrate .cb-ring.r1{width:156px;height:156px;border-color:rgba(217,169,62,.34);animation:cbRing 22s linear infinite}
+  #cb-migrate .cb-ring.r2{width:220px;height:220px;border-color:rgba(87,217,232,.24);animation:cbRing 32s linear infinite reverse}
+  #cb-migrate .cb-ring.r3{width:284px;height:284px;border-color:rgba(217,169,62,.16);animation:cbRing 44s linear infinite}
+  @keyframes cbRing{
+    from{transform:translate(-50%,-50%) rotateX(72deg) rotateZ(0)}
+    to{transform:translate(-50%,-50%) rotateX(72deg) rotateZ(360deg)}
+  }
 
-<!-- LEVELS VISUAL -->
-<section id="levels">
-  <div class="container">
-    <div class="section-label">HỆ THỐNG ĐA TẦNG</div>
-    <h2 class="sec-title reveal">3 Tầng bảo vệ tự động</h2>
-    <p class="sec-sub reveal">EA tự động leo/xuống tầng dựa trên mức lỗ floating, không cần can thiệp thủ công</p>
-    <div class="levels-grid reveal">
-      <div class="level-card"><div class="level-hdr lv1-hdr"><div class="level-name" style="color:var(--grn)">LEVEL 1</div><span class="level-trigger t-green">Mặc định</span></div><div class="level-body"><div class="lv-row"><span class="lv-key">Step DCA</span><span class="lv-val v-grn">120 pips</span></div><div class="lv-row"><span class="lv-key">Loại lot</span><span class="lv-val v-t1">Cộng (lotplus)</span></div><div class="lv-row"><span class="lv-key">Hệ số nhân</span><span class="lv-val v-t1">1.05</span></div><div class="lv-row"><span class="lv-key">Chế độ</span><span class="lv-val v-t1">Lũy tiến</span></div><div class="lv-row"><span class="lv-key">Kích hoạt</span><span class="lv-val v-grn">Lỗ &lt; $2,000</span></div></div></div>
-      <div class="level-card"><div class="level-hdr lv2-hdr"><div class="level-name" style="color:var(--yel)">LEVEL 2</div><span class="level-trigger t-orange">Lỗ &gt; $2,000</span></div><div class="level-body"><div class="lv-row"><span class="lv-key">Step DCA</span><span class="lv-val v-yel">210 pips</span></div><div class="lv-row"><span class="lv-key">Loại lot</span><span class="lv-val v-t1">Nhân (xlot)</span></div><div class="lv-row"><span class="lv-key">Hệ số nhân</span><span class="lv-val v-yel">1.6 🔥</span></div><div class="lv-row"><span class="lv-key">Chế độ</span><span class="lv-val v-t1">Bù lot</span></div><div class="lv-row"><span class="lv-key">Kích hoạt</span><span class="lv-val v-yel">Lỗ ≤ -$2,000</span></div></div></div>
-      <div class="level-card"><div class="level-hdr lv3-hdr"><div class="level-name" style="color:var(--red)">LEVEL 3</div><span class="level-trigger t-red">Lỗ &gt; $9,000</span></div><div class="level-body"><div class="lv-row"><span class="lv-key">Step DCA</span><span class="lv-val v-red">180 pips</span></div><div class="lv-row"><span class="lv-key">Loại lot</span><span class="lv-val v-t1">Cộng (lotplus)</span></div><div class="lv-row"><span class="lv-key">Hệ số nhân</span><span class="lv-val v-red">1.5</span></div><div class="lv-row"><span class="lv-key">Chế độ</span><span class="lv-val v-t1">Lũy tiến</span></div><div class="lv-row"><span class="lv-key">Kích hoạt</span><span class="lv-val v-red">Lỗ ≤ -$9,000</span></div></div></div>
-    </div>
-    <div class="reveal" style="margin-top:36px;background:var(--bg2);border-radius:20px;padding:28px;border:1px solid rgba(245,176,65,0.1);"><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--yel);margin-bottom:16px;">⚙️ LOGIC CHUYỂN TẦNG</div><div style="font-size:14px;color:var(--t2);line-height:1.8;">Mỗi chiều Buy/Sell có level độc lập dựa trên lỗ riêng. Level dùng để tính lot là <strong>max(buyLevel, sellLevel)</strong>. Xuống tầng chỉ khi lỗ phục hồi vượt ngưỡng + Buffer $100, tránh dao động.</div></div>
-  </div>
-</section>
+  /* Quả cầu vàng */
+  #cb-migrate .cb-planet{
+    position:relative;width:108px;height:108px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 30% 25%,#FFF8DD 0%,#F5D77A 18%,#D9A93E 42%,#B8892A 68%,#7A5C14 100%);
+    box-shadow:0 0 32px rgba(217,169,62,.55),0 0 76px rgba(217,169,62,.25),inset -14px -20px 40px rgba(0,0,0,.55),inset 10px 10px 26px rgba(255,248,221,.35);
+    animation:cbFloat 6s ease-in-out infinite;
+  }
+  #cb-migrate .cb-planet::before{
+    content:'';position:absolute;inset:-24px;border-radius:50%;
+    background:radial-gradient(circle,rgba(217,169,62,.35),transparent 70%);
+    animation:cbGlow 4s ease-in-out infinite;z-index:-1;
+  }
+  @keyframes cbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  @keyframes cbGlow{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.12);opacity:.95}}
+  #cb-migrate .cb-planet-inner{text-align:center}
+  #cb-migrate .cb-planet-main{
+    font-family:'Space Grotesk','Inter',sans-serif;font-size:18px;font-weight:700;color:#fff;line-height:1.1;
+    text-shadow:0 2px 8px rgba(0,0,0,.55),0 0 12px rgba(232,199,102,.4);
+  }
+  #cb-migrate .cb-planet-sub{
+    font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,.9);
+    letter-spacing:2px;font-weight:700;margin-top:3px;
+  }
+  /* Nhãn FREE trên quả cầu */
+  #cb-migrate .cb-free-badge{
+    position:absolute;right:-18px;top:2px;
+    padding:4px 9px;border-radius:100px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.08em;
+    color:#04210f;background:linear-gradient(135deg,#7CFFB2,#2DD47F);
+    box-shadow:0 0 0 3px rgba(7,10,19,.9),0 4px 14px rgba(45,212,127,.5);
+    animation:cbBadge 2.4s ease-in-out infinite;
+  }
+  @keyframes cbBadge{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 
-<!-- TRIM SYSTEM (bỏ phần ATR Buffer giải thích công thức) -->
-<section id="trim">
-  <div class="container">
-    <div class="section-label">HỆ THỐNG TỈA LỆNH</div>
-    <h2 class="sec-title reveal">4 Cơ chế tỉa lệnh thông minh</h2>
-    <p class="sec-sub reveal">Giảm drawdown bằng cách kết hợp lệnh lãi và lỗ để thoát ở mức tốt nhất</p>
-    <div class="trim-cards reveal">
-      <div class="trim-card"><div class="trim-icon">✂️</div><div class="trim-title">Trims By ChainProfit</div><div class="trim-desc">Khi lỗ floating vượt <code>loss_trims</code>, Dùng lãi tích lũy từ chu kỳ trước để đóng lệnh lỗ nặng nhất.</div><div class="trim-formula">Ngân sách = Lãi tích lũy → đóng lệnh lỗ cho đến hết ngân sách từ lãi tích lũy</div></div>
-      <div class="trim-card"><div class="trim-icon">⚖️</div><div class="trim-title">Trims LaiTiaNhieuLo</div><div class="trim-desc">Khi có 1 lệnh lãi đủ mạnh, EA tìm số lệnh lỗ tối đa mà tổng lãi có thể bù, đóng nhóm đó cùng lúc.</div><div class="trim-formula">if (profit_lãi + Σprofit_lỗ) ≥ MinTrimProfit → đóng 1 lãi + N lỗ</div></div>
-      <div class="trim-card"><div class="trim-icon">🎯</div><div class="trim-title">GroupTP_3Orders</div><div class="trim-desc">Khi số lệnh ≥ 12, gom 3 lệnh sâu nhất, tính giá breakeven trung bình + Step pips, đặt TP cho nhóm đó.</div><div class="trim-formula">avg = (P1×L1 + P2×L2 + P3×L3)/(L1+L2+L3) → TP = avg + Step</div></div>
-      <div class="trim-card"><div class="trim-icon">🔄</div><div class="trim-title">SmartHedgeClose</div><div class="trim-desc">Khi cả BUY và SELL đang mở và tổng P&L dương, EA kiểm tra drawdown: DD>3% chốt ngay, DD 1-3% chốt khi lãi gấp 3 lần ngưỡng.</div></div>
-    </div>
-  </div>
-</section>
+  /* Hệ vệ tinh quay quanh (trục Y) */
+  #cb-migrate .cb-orbit-system{
+    position:absolute;top:50%;left:50%;width:0;height:0;
+    transform-style:preserve-3d;
+    animation:cbUni 30s linear infinite;
+  }
+  @keyframes cbUni{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+  #cb-migrate .cb-sat{
+    position:absolute;top:0;left:0;width:0;height:0;
+    transform-style:preserve-3d;
+    transform:rotateY(var(--angle)) translateZ(var(--r));
+  }
+  /* chip luôn quay mặt về phía người xem */
+  #cb-migrate .cb-chip{
+    position:absolute;top:0;left:0;
+    display:flex;align-items:center;gap:6px;
+    padding:6px 11px 6px 8px;white-space:nowrap;
+    background:linear-gradient(135deg,rgba(22,29,48,.97),rgba(13,18,32,.97));
+    border:1px solid rgba(217,169,62,.35);border-radius:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,.6),0 0 12px rgba(217,169,62,.15);
+    transform:translate(-50%,-50%) rotateY(calc(-1 * var(--angle)));
+    animation:cbCounter 30s linear infinite;
+  }
+  @keyframes cbCounter{
+    from{transform:translate(-50%,-50%) rotateY(calc(-1 * var(--angle)))}
+    to{transform:translate(-50%,-50%) rotateY(calc(-1 * var(--angle) - 360deg))}
+  }
+  #cb-migrate .cb-sat:nth-child(1) .cb-chip{border-color:rgba(217,169,62,.6)}
+  #cb-migrate .cb-sat:nth-child(2) .cb-chip{border-color:rgba(87,217,232,.45)}
+  #cb-migrate .cb-sat:nth-child(3) .cb-chip{border-color:rgba(255,140,66,.45)}
+  #cb-migrate .cb-sat:nth-child(4) .cb-chip{border-color:rgba(74,125,255,.45)}
+  #cb-migrate .cb-sat:nth-child(5) .cb-chip{border-color:rgba(55,217,155,.45)}
+  #cb-migrate .cb-sat:nth-child(6) .cb-chip{border-color:rgba(160,107,255,.45)}
+  #cb-migrate .cb-chip .cb-ico{font-size:12px;flex-shrink:0}
+  #cb-migrate .cb-chip .cb-name{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:#f0f3f8}
 
-<!-- WARNING -->
-<section id="warn"><div class="container"><div class="warn-box reveal"><div class="warn-icon">⚠️</div><div><div class="warn-title">Cảnh báo rủi ro quan trọng</div><ul class="warn-list"><li>Giao dịch CFD (Forex, Vàng, Index...) có rủi ro cao, có thể mất toàn bộ vốn.</li><li>Chiến lược DCA có thể gặp drawdown lớn khi thị trường đi ngược chiều kéo dài. Cần tài khoản đủ lớn.</li><li>Tác giả (TCODE) không chịu trách nhiệm về kết quả giao dịch. Sử dụng EA đồng nghĩa chấp nhận rủi ro.</li><li>Luôn test EA trên tài khoản Demo hoặc Visual Backtest trước khi chạy thật.</li></ul></div></div></div></section>
+  /* ===== NỘI DUNG ===== */
+  #cb-migrate .cb-title{
+    font-family:'Space Grotesk','Inter',sans-serif;
+    font-size:24px;font-weight:700;line-height:1.25;letter-spacing:-.02em;
+    margin:0 0 10px;
+    background:linear-gradient(135deg,#FFE9A0 0%,#F5B041 55%,#D9A93E 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:#f5b041;
+  }
+  #cb-migrate .cb-desc{font-size:14px;color:#9aa6c2;line-height:1.7;margin:0 auto 18px;max-width:440px}
+  #cb-migrate .cb-desc strong{color:#E8C766;font-weight:600}
 
-<!-- CONTACT -->
-<section id="contact"><div class="container"><div class="section-label">LIÊN HỆ MUA EA</div><h2 class="sec-title reveal">Nhận EA & Hỗ trợ</h2><p class="sec-sub reveal">Liên hệ trực tiếp qua các kênh dưới đây</p><div class="contact-grid reveal">
-  <a href="https://zalo.me/0964822327" class="contact-card"><div class="icon">💬</div><div class="label">ZALO</div><div class="value">0964 822 327</div></a>
-  <a href="mailto:tcodefx.auto@gmail.com" class="contact-card"><div class="icon">✉️</div><div class="label">GMAIL</div><div class="value">tcodefx.auto@gmail.com</div></a>
-  <a href="https://t.me/tCode_T95" class="contact-card"><div class="icon">✈️</div><div class="label">TELEGRAM</div><div class="value">t.me/tCode_T95</div></a>
-  <a href="https://tcodedang.github.io/tcode-dev/" class="contact-card"><div class="icon">🌐</div><div class="label">WEBSITE</div><div class="value">tcodedang.github.io</div></a>
-</div><div style="margin-top:40px"><a href="https://zalo.me/0964822327" class="btn-primary">📞 Zalo ngay</a></div></div></section>
+  #cb-migrate .cb-feats{
+    list-style:none;padding:0;margin:0 0 16px;
+    display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:left;
+  }
+  #cb-migrate .cb-feats li{
+    display:flex;align-items:center;gap:10px;
+    font-size:12.5px;font-weight:500;color:#e8edf7;line-height:1.35;
+    padding:9px 11px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.07);border-radius:10px;
+  }
+  #cb-migrate .cb-feats li i{
+    font-style:normal;font-size:14px;flex-shrink:0;
+    width:28px;height:28px;display:grid;place-items:center;
+    background:rgba(217,169,62,.12);border-radius:8px;
+  }
 
-<footer>© 2024–2025 <span>TCODE</span> — XTO Speeder EA MT5 v1.4 — All Rights Reserved<br>tcodedang.github.io/tcode-dev/</footer>
+  /* ===== KHUNG MIỄN PHÍ ===== */
+  #cb-migrate .cb-free{
+    display:flex;align-items:center;gap:12px;text-align:left;
+    margin:0 0 16px;padding:12px 14px;
+    background:linear-gradient(135deg,rgba(45,212,127,.14),rgba(45,212,127,.05));
+    border:1px solid rgba(45,212,127,.4);border-radius:12px;
+    box-shadow:0 0 24px -8px rgba(45,212,127,.45);
+  }
+  #cb-migrate .cb-free-ico{
+    flex-shrink:0;width:38px;height:38px;display:grid;place-items:center;font-size:20px;
+    background:rgba(45,212,127,.18);border-radius:10px;
+  }
+  #cb-migrate .cb-free-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+  #cb-migrate .cb-free-txt strong{font-size:14px;font-weight:700;color:#7CFFB2;line-height:1.3}
+  #cb-migrate .cb-free-txt span{font-size:12.5px;color:#b5c2d9;line-height:1.5}
+
+  /* ===== NÚT CTA ===== */
+  #cb-migrate .cb-btn{
+    position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    width:100%;padding:15px 26px;
+    background:linear-gradient(135deg,#FFE566 0%,#F0C04A 35%,#C9972A 70%,#8B6914 100%);
+    color:#181206;font-size:15.5px;font-weight:700;text-decoration:none;
+    border-radius:40px;
+    box-shadow:0 8px 26px rgba(217,169,62,.42);
+    transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s;
+  }
+  #cb-migrate .cb-btn::after{
+    content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skewX(-20deg);animation:cbShine 3.6s ease-in-out infinite;
+  }
+  @keyframes cbShine{0%,55%{left:-60%}100%{left:130%}}
+  #cb-migrate .cb-btn svg{transition:transform .25s}
+  #cb-migrate .cb-btn:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(217,169,62,.58);color:#181206}
+  #cb-migrate .cb-btn:hover svg{transform:translateX(3px)}
+  #cb-migrate .cb-btn:active{transform:translateY(0)}
+  #cb-migrate .cb-btn:focus-visible,
+  #cb-migrate .cb-lang button:focus-visible{outline:2px solid #7CFFB2;outline-offset:3px}
+
+
+  /* ===== MOBILE ===== */
+  @media(max-width:520px){
+    #cb-migrate .cb-box{padding:14px 18px 18px}
+    #cb-migrate .cb-stage{height:200px;--r:104px}
+    #cb-migrate .cb-ring.r1{width:128px;height:128px}
+    #cb-migrate .cb-ring.r2{width:180px;height:180px}
+    #cb-migrate .cb-ring.r3{width:232px;height:232px}
+    #cb-migrate .cb-planet{width:90px;height:90px}
+    #cb-migrate .cb-planet-main{font-size:15px}
+    #cb-migrate .cb-free-badge{right:-14px;font-size:9px}
+    #cb-migrate .cb-title{font-size:20px}
+    #cb-migrate .cb-desc{font-size:13px}
+    #cb-migrate .cb-feats{grid-template-columns:1fr}
+    #cb-migrate .cb-chip{padding:5px 9px 5px 7px}
+    #cb-migrate .cb-chip .cb-name{font-size:9px}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    #cb-migrate *{animation:none!important}
+  }
+</style>
 
 <script>
-function switchTab(id){
-  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  event.target.classList.add('active');
-}
-const observer = new IntersectionObserver(e=>e.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}}));
+(function(){
+  /* ===== SONG NGỮ — MẶC ĐỊNH TIẾNG ANH ===== */
+  var CB_I18N = {
+    en: {
+      badge    : 'FREE',
+      title    : 'XTO Speeder has been upgraded!',
+      desc     : 'XTO Speeder is now integrated as <strong>a Bot Trade Module</strong> inside the super EA <strong>CityBot</strong> — together with 15+ modules and new tools.',
+      f1       : 'Multi-strategy Bot Trade',
+      f2       : 'Semi-auto tools &amp; order management',
+      f3       : 'Market insight &amp; trade statistics',
+      f4       : 'Free to use',
+      freeTitle: 'EA CityBot — Free to use',
+      btn      : 'Get CityBot for free'
+    },
+    vi: {
+      badge    : 'MIỄN PHÍ',
+      title    : 'XTO Speeder đã được nâng cấp!',
+      desc     : 'XTO Speeder nay đã tích hợp thành <strong>1 Module Bot Trade</strong> trong siêu EA <strong>CityBot</strong> — cùng 15+ module và công cụ mới.',
+      f1       : 'Bot Trade đa chiến lược',
+      f2       : 'Công cụ bán tự động &amp; quản lý lệnh',
+      f3       : 'Insight thị trường &amp; thống kê giao dịch',
+      f4       : 'Miễn phí sử dụng',
+      freeTitle: 'EA CityBot — Miễn phí sử dụng',
+      btn      : 'Nhận CityBot miễn phí'
+    }
+  };
+
+  var currentLang = 'en';
+  try {
+    var saved = localStorage.getItem('cb_lang');
+    if (saved === 'vi' || saved === 'en') currentLang = saved;
+  } catch(e){}
+
+  window.cbSetLang = function(lang){
+    if (!CB_I18N[lang]) return;
+    currentLang = lang;
+    try { localStorage.setItem('cb_lang', lang); } catch(e){}
+    document.documentElement.setAttribute('data-cb-lang', lang);
+    document.querySelectorAll('#cb-migrate .cb-lang button').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    document.querySelectorAll('#cb-migrate [data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (CB_I18N[lang][key] != null) el.innerHTML = CB_I18N[lang][key];
+    });
+  };
+  window.cbSetLang(currentLang);
+
+  /* ===== BẦU TRỜI SAO ===== */
+  function initStars(){
+    var canvas = document.getElementById('cb-stars');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W, H, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var stars = [], t = 0;
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function build(){
+      var count = Math.max(60, Math.min(160, Math.floor((W * H) / 9000)));
+      stars = [];
+      for (var i = 0; i < count; i++){
+        var r = Math.random();
+        stars.push({
+          x: Math.random() * W, y: Math.random() * H,
+          r: Math.random() * 1.3 + 0.4,
+          base: Math.random() * 0.5 + 0.3,
+          speed: Math.random() * 0.8 + 0.4,
+          phase: Math.random() * Math.PI * 2,
+          rgb: r < 0.35 ? '232,212,154' : (r < 0.65 ? '184,232,255' : '255,255,255')
+        });
+      }
+    }
+    function resize(){
+      var p = canvas.parentElement;
+      W = p.clientWidth; H = p.clientHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      build();
+      if (reduce) draw(true);
+    }
+    function draw(once){
+      t += 0.016;
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < stars.length; i++){
+        var s = stars[i];
+        var a = Math.min(1, Math.max(0, s.base + Math.sin(t * s.speed + s.phase) * 0.35));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + s.rgb + ',' + a + ')';
+        ctx.fill();
+      }
+      if (once !== true && !reduce) requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+    if (!reduce) draw();
+  }
+
+  /* ===== HIỂN THỊ — luôn hiện, không thể đóng ===== */
+  function showPopup(){
+    var box = document.getElementById('cb-migrate');
+    if (!box) return;
+    box.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    initStars();
+    var cta = document.getElementById('cb-cta');
+    if (cta) cta.focus({ preventScroll: true });
+  }
+
+  (function(){
+    var go = function(){ setTimeout(showPopup, 300); };
+    if (document.readyState === 'complete') go();
+    else window.addEventListener('load', go);
+  })();
+})();
 </script>
-</body>
-</html>
+<!-- /POPUP THÔNG BÁO NÂNG CẤP XTO SPEEDER → CITYBOT -->
