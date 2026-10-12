@@ -1,4 +1,3 @@
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -12,7 +11,6 @@
   </div>
 
   <div class="cb-box">
-    <!-- Thanh trên: ngôn ngữ + đóng -->
     <div class="cb-top">
       <div class="cb-lang" role="group" aria-label="Language">
         <button type="button" data-lang="vi" onclick="cbSetLang('vi')">VI</button>
@@ -20,7 +18,6 @@
       </div>
     </div>
 
-    <!-- Quả cầu + vệ tinh -->
     <div class="cb-stage">
       <div class="cb-ring r1"></div>
       <div class="cb-ring r2"></div>
@@ -56,7 +53,6 @@
       <li><i>🎁</i><span data-i18n="f4">Free to use</span></li>
     </ul>
 
-    <!-- Ghi chú MIỄN PHÍ (tăng chuyển đổi) -->
     <div class="cb-free">
       <div class="cb-free-ico">🎁</div>
       <div class="cb-free-txt">
@@ -72,7 +68,6 @@
 </div>
 
 <style>
-  /* ===== OVERLAY ===== */
   #cb-migrate.cb-overlay{
     position:fixed;inset:0;z-index:9999;
     display:none;align-items:center;justify-content:center;
@@ -93,6 +88,7 @@
   @keyframes cbNeb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-80px,40px) scale(1.1)}}
   @keyframes cbNeb3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-50px,-60px) scale(.92)}}
   #cb-stars{position:absolute;inset:0;width:100%;height:100%}
+
   #cb-migrate .cb-box{
     position:relative;z-index:2;
     width:100%;max-width:540px;
@@ -119,7 +115,6 @@
   #cb-migrate .cb-box::-webkit-scrollbar-thumb{background:rgba(217,169,62,.35);border-radius:4px}
   @keyframes cbPop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
 
-  /* ===== THANH TRÊN ===== */
   #cb-migrate .cb-top{display:flex;align-items:center;justify-content:flex-end;position:relative;z-index:6}
   #cb-migrate .cb-lang{
     display:flex;gap:2px;padding:3px;
@@ -181,7 +176,6 @@
     font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,.9);
     letter-spacing:2px;font-weight:700;margin-top:3px;
   }
-
   #cb-migrate .cb-free-badge{
     position:absolute;right:-18px;top:2px;
     padding:4px 9px;border-radius:100px;
@@ -203,7 +197,6 @@
     transform-style:preserve-3d;
     transform:rotateY(var(--angle)) translateZ(var(--r));
   }
-
   #cb-migrate .cb-chip{
     position:absolute;top:0;left:0;
     display:flex;align-items:center;gap:6px;
@@ -255,7 +248,6 @@
     background:rgba(217,169,62,.12);border-radius:8px;
   }
 
-  /* ===== KHUNG MIỄN PHÍ ===== */
   #cb-migrate .cb-free{
     display:flex;align-items:center;gap:12px;text-align:left;
     margin:0 0 16px;padding:12px 14px;
@@ -271,11 +263,10 @@
   #cb-migrate .cb-free-txt strong{font-size:14px;font-weight:700;color:#7CFFB2;line-height:1.3}
   #cb-migrate .cb-free-txt span{font-size:12.5px;color:#b5c2d9;line-height:1.5}
 
-  /* ===== NÚT CTA ===== */
   #cb-migrate .cb-btn{
     position:relative;overflow:hidden;
     display:flex;align-items:center;justify-content:center;gap:9px;
-    width:100%;padding:15px 26px;
+    width:100%;padding:15px 0;
     background:linear-gradient(135deg,#FFE566 0%,#F0C04A 35%,#C9972A 70%,#8B6914 100%);
     color:#181206;font-size:15.5px;font-weight:700;text-decoration:none;
     border-radius:40px;
@@ -295,8 +286,6 @@
   #cb-migrate .cb-btn:focus-visible,
   #cb-migrate .cb-lang button:focus-visible{outline:2px solid #7CFFB2;outline-offset:3px}
 
-
-  /* ===== MOBILE ===== */
   @media(max-width:520px){
     #cb-migrate .cb-box{padding:14px 18px 18px}
     #cb-migrate .cb-stage{height:200px;--r:104px}
@@ -320,7 +309,6 @@
 
 <script>
 (function(){
-  /* ===== SONG NGỮ — MẶC ĐỊNH TIẾNG ANH ===== */
   var CB_I18N = {
     en: {
       badge    : 'FREE',
@@ -367,7 +355,6 @@
   };
   window.cbSetLang(currentLang);
 
-  /* ===== BẦU TRỜI SAO ===== */
   function initStars(){
     var canvas = document.getElementById('cb-stars');
     if (!canvas) return;
@@ -417,7 +404,6 @@
     if (!reduce) draw();
   }
 
-  /* ===== HIỂN THỊ — luôn hiện, không thể đóng ===== */
   function showPopup(){
     var box = document.getElementById('cb-migrate');
     if (!box) return;
@@ -435,4 +421,3 @@
   })();
 })();
 </script>
-<!-- /POPUP THÔNG BÁO NÂNG CẤP XTO SPEEDER → CITYBOT -->
